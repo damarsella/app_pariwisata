@@ -1,57 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="50328c8e-3630-42bd-ab70-bbadfdffa14e">
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Keuangan" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="50328c8e-3630-42bd-ab70-bbadfdffa14e">
 	<property name="ireport.zoom" value="0.7513148009015777"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Kelurahan"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Pulau Pari"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="dari" class="java.util.Date"/>
+	<parameter name="sampai" class="java.sql.Date"/>
 	<queryString language="SQL">
-		<![CDATA[]]>
+		<![CDATA[SELECT id, id_wisata, paket_wisata, harga_wisata, via_pembayaran, id_penginapan, nama_penginapan, id_pengunjung, nama_pengunjung, deskripsi_makanan_minuman, deskripsi_tambahan, dari, sampai, total_tanggal
+FROM paket_wisata WHERE dari BETWEEN  $P{dari}  AND $P{sampai};
+]]>
 	</queryString>
-	<field name="surat" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="surat"/>
-		<property name="com.jaspersoft.studio.field.label" value="surat"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="sktm"/>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
 	</field>
-	<field name="nik" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="nik"/>
-		<property name="com.jaspersoft.studio.field.label" value="nik"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="sktm"/>
+	<field name="id_wisata" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_wisata"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_wisata"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
 	</field>
-	<field name="nokk" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="NOKK"/>
-		<property name="com.jaspersoft.studio.field.label" value="nokk"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="data_penduduk"/>
+	<field name="paket_wisata" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="paket_wisata"/>
+		<property name="com.jaspersoft.studio.field.label" value="paket_wisata"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
 	</field>
-	<field name="nama" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="Nama"/>
-		<property name="com.jaspersoft.studio.field.label" value="nama"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="data_penduduk"/>
+	<field name="harga_wisata" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="harga_wisata"/>
+		<property name="com.jaspersoft.studio.field.label" value="harga_wisata"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
 	</field>
-	<field name="ttl" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="Tanggal_Lahir"/>
-		<property name="com.jaspersoft.studio.field.label" value="ttl"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="data_penduduk"/>
+	<field name="via_pembayaran" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="via_pembayaran"/>
+		<property name="com.jaspersoft.studio.field.label" value="via_pembayaran"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
 	</field>
-	<field name="jk" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="Jenis_Kelamin"/>
-		<property name="com.jaspersoft.studio.field.label" value="jk"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="data_penduduk"/>
+	<field name="id_penginapan" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_penginapan"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_penginapan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
 	</field>
-	<field name="sk" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="Status_Keluarga"/>
-		<property name="com.jaspersoft.studio.field.label" value="sk"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="data_penduduk"/>
+	<field name="nama_penginapan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_penginapan"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_penginapan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
 	</field>
-	<field name="agama" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="Agama"/>
-		<property name="com.jaspersoft.studio.field.label" value="agama"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="data_penduduk"/>
+	<field name="id_pengunjung" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_pengunjung"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_pengunjung"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
 	</field>
-	<field name="alamat" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="Alamat"/>
-		<property name="com.jaspersoft.studio.field.label" value="alamat"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="data_penduduk"/>
+	<field name="nama_pengunjung" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_pengunjung"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_pengunjung"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
+	</field>
+	<field name="deskripsi_makanan_minuman" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="deskripsi_makanan_minuman"/>
+		<property name="com.jaspersoft.studio.field.label" value="deskripsi_makanan_minuman"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
+	</field>
+	<field name="deskripsi_tambahan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="deskripsi_tambahan"/>
+		<property name="com.jaspersoft.studio.field.label" value="deskripsi_tambahan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
+	</field>
+	<field name="dari" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="dari"/>
+		<property name="com.jaspersoft.studio.field.label" value="dari"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
+	</field>
+	<field name="sampai" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="sampai"/>
+		<property name="com.jaspersoft.studio.field.label" value="sampai"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
+	</field>
+	<field name="total_tanggal" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="total_tanggal"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_tanggal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paket_wisata"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -87,14 +117,14 @@
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Laporan Pemesanan Paket Wisata]]></text>
+				<text><![CDATA[Laporan Keuangan]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="d7004802-0708-4630-bd95-643d64dbb75b"/>
+				<reportElement x="0" y="0" width="110" height="20" uuid="d7004802-0708-4630-bd95-643d64dbb75b"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -108,7 +138,7 @@
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="0" width="100" height="20" uuid="2bd9542a-20bf-490b-9779-e9a53b13ee28"/>
+				<reportElement x="110" y="0" width="390" height="20" uuid="2bd9542a-20bf-490b-9779-e9a53b13ee28"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -122,7 +152,7 @@
 				<text><![CDATA[Pake Wisata]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="0" width="100" height="20" uuid="63af8054-1b28-42a8-8ad9-c38153a4681d"/>
+				<reportElement x="501" y="0" width="300" height="20" uuid="63af8054-1b28-42a8-8ad9-c38153a4681d"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -135,82 +165,12 @@
 				</textElement>
 				<text><![CDATA[Harga]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="300" y="0" width="100" height="20" uuid="fdf654ea-5364-4269-92c0-8fb32d1c4905"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Pembayaran]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="400" y="0" width="100" height="20" uuid="4fec4679-c404-4a09-93d7-6e6194e5c969"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Penginapan]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="500" y="0" width="100" height="20" uuid="e477a2e9-5bd1-4f97-83aa-c8e7d20bf95d"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[User]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="600" y="0" width="100" height="20" uuid="1275f51f-b6b6-46ec-acd6-c7513c373d8e"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Makanan]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="700" y="0" width="101" height="20" uuid="2c021e42-7364-448d-9932-143bc1e571d3"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tambahan]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="490e9ea3-3be6-47b2-a490-442ec805c34f"/>
+				<reportElement x="0" y="0" width="110" height="20" uuid="490e9ea3-3be6-47b2-a490-442ec805c34f"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -222,7 +182,7 @@
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="100" height="20" uuid="75a5eebe-cfb7-4a5f-a418-db675d3639c7"/>
+				<reportElement x="110" y="0" width="390" height="20" uuid="75a5eebe-cfb7-4a5f-a418-db675d3639c7"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -234,7 +194,7 @@
 				<textFieldExpression><![CDATA[$F{paket_wisata}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="100" height="20" uuid="6f113cc4-46e1-4b9f-a38c-194ea60ffec9"/>
+				<reportElement x="501" y="0" width="300" height="20" uuid="6f113cc4-46e1-4b9f-a38c-194ea60ffec9"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -243,67 +203,7 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="300" y="0" width="100" height="20" uuid="15f28b24-e338-48cb-a79d-a22ec9b0ff56"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{pembayaran}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="400" y="0" width="100" height="20" uuid="1fe2eb48-26c0-46fa-a544-dbbf65fd91b7"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{penginapan}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="500" y="0" width="100" height="20" uuid="f7206a02-60e6-4337-b59a-34e9f5367983"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="600" y="0" width="100" height="20" uuid="7a3be659-d9cb-48b8-9166-1fa36bc57843"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{makanan}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="700" y="0" width="101" height="20" uuid="70f9aa37-a07b-4241-8a71-70a8c0eb358a"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{tambahan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{harga_wisata} * $F{total_tanggal}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
