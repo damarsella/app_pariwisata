@@ -1,110 +1,135 @@
 package pariwisata.model.transaksi;
 
+import java.util.Date;
+
 public class Transaksi {
     
-    private Long id;
-    private Double idTour;
-    private String tourPackages;
-    private String tourPrice;
-    private String viaPayment;
-    private String idLodging;
-    private String nameLodging;
-    private Long idUser;
-    private String nameuser;
-    private String foodDescrip;
-    private String addFoodDescrip;
+    private int id;
+    private int id_wisata;
+    private String paket_wisata;
+    private int harga_wisata;
+    private String via_pembayaran;
+    private int id_penginapan;
+    private String nama_penginapan;
+    private int id_pengunjung;
+    private String nama_pengunjung;
+    private String deskripsi_makanan_minuman;
+    private String deskripsi_tambahan;
+    private Date dari;
+    private Date sampai;
+    private int total_tanggal;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Double getIdTour() {
-        return idTour;
+    public int getId_wisata() {
+        return id_wisata;
     }
 
-    public void setIdTour(Double idTour) {
-        this.idTour = idTour;
+    public void setId_wisata(int id_wisata) {
+        this.id_wisata = id_wisata;
     }
 
-    public String getTourPackages() {
-        return tourPackages;
+    public String getPaket_wisata() {
+        return paket_wisata;
     }
 
-    public void setTourPackages(String tourPackages) {
-        this.tourPackages = tourPackages;
+    public void setPaket_wisata(String paket_wisata) {
+        this.paket_wisata = paket_wisata;
     }
 
-    public String getTourPrice() {
-        return tourPrice;
+    public int getHarga_wisata() {
+        return harga_wisata;
     }
 
-    public void setTourPrice(String tourPrice) {
-        this.tourPrice = tourPrice;
+    public void setHarga_wisata(int harga_wisata) {
+        this.harga_wisata = harga_wisata;
     }
 
-    public String getViaPayment() {
-        return viaPayment;
+    public String getVia_pembayaran() {
+        return via_pembayaran;
     }
 
-    public void setViaPayment(String viaPayment) {
-        this.viaPayment = viaPayment;
+    public void setVia_pembayaran(String via_pembayaran) {
+        this.via_pembayaran = via_pembayaran;
     }
 
-    public String getIdLodging() {
-        return idLodging;
+    public int getId_penginapan() {
+        return id_penginapan;
     }
 
-    public void setIdLodging(String idLodging) {
-        this.idLodging = idLodging;
+    public void setId_penginapan(int id_penginapan) {
+        this.id_penginapan = id_penginapan;
     }
 
-    public String getNameLodging() {
-        return nameLodging;
+    public String getNama_penginapan() {
+        return nama_penginapan;
     }
 
-    public void setNameLodging(String nameLodging) {
-        this.nameLodging = nameLodging;
+    public void setNama_penginapan(String nama_penginapan) {
+        this.nama_penginapan = nama_penginapan;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public int getId_pengunjung() {
+        return id_pengunjung;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setId_pengunjung(int id_pengunjung) {
+        this.id_pengunjung = id_pengunjung;
     }
 
-    public String getNameuser() {
-        return nameuser;
+    public String getNama_pengunjung() {
+        return nama_pengunjung;
     }
 
-    public void setNameuser(String nameuser) {
-        this.nameuser = nameuser;
+    public void setNama_pengunjung(String nama_pengunjung) {
+        this.nama_pengunjung = nama_pengunjung;
     }
 
-    public String getFoodDescrip() {
-        return foodDescrip;
+    public String getDeskripsi_makanan_minuman() {
+        return deskripsi_makanan_minuman;
     }
 
-    public void setFoodDescrip(String foodDescrip) {
-        this.foodDescrip = foodDescrip;
+    public void setDeskripsi_makanan_minuman(String deskripsi_makanan_minuman) {
+        this.deskripsi_makanan_minuman = deskripsi_makanan_minuman;
     }
 
-    public String getAddFoodDescrip() {
-        return addFoodDescrip;
+    public String getDeskripsi_tambahan() {
+        return deskripsi_tambahan;
     }
 
-    public void setAddFoodDescrip(String addFoodDescrip) {
-        this.addFoodDescrip = addFoodDescrip;
+    public void setDeskripsi_tambahan(String deskripsi_tambahan) {
+        this.deskripsi_tambahan = deskripsi_tambahan;
     }
 
-    @Override
-    public String toString() {
-        return "Transaksi{" + "id=" + id + ", idTour=" + idTour + ", tourPackages=" + tourPackages + ", tourPrice=" + tourPrice + ", viaPayment=" + viaPayment + ", idLodging=" + idLodging + ", nameLodging=" + nameLodging + ", idUser=" + idUser + ", nameuser=" + nameuser + ", foodDescrip=" + foodDescrip + ", addFoodDescrip=" + addFoodDescrip + '}';
+    public Date getDari() {
+        return dari;
     }
+
+    public void setDari(Date dari) {
+        this.dari = dari;
+    }
+
+    public Date getSampai() {
+        return sampai;
+    }
+
+    public void setSampai(Date sampai) {
+        this.sampai = sampai;
+    }
+
+    public int getTotal_tanggal() {
+        return total_tanggal;
+    }
+
+    public void setTotal_tanggal(int total_tanggal) {
+        this.total_tanggal = total_tanggal;
+    }
+    
     
 }

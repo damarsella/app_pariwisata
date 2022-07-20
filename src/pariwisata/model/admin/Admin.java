@@ -2,46 +2,34 @@ package pariwisata.model.admin;
 
 public class Admin {
     
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String userName;
+    private int id;
+    private String nama;
+    private String user;
     private String password;
-    private String gender;
-    private String phone;
-    private String address;
     private String role;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getNama() {
+        return nama;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getUser() {
+        return user;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getPassword() {
@@ -50,30 +38,6 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getRole() {
@@ -85,9 +49,9 @@ public class Admin {
     }
 
     @Override
-    public String toString() 
-    {
-        return "Admin{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", password=" + password + ", gender=" + gender + ", phone=" + phone + ", address=" + address + ", role=" + role + '}';
+    public String toString() {
+        return "Admin{" + "id=" + id + ", nama=" + nama + ", user=" + user + ", password=" + password + ", role=" + role + '}';
     }
+    
     
 }

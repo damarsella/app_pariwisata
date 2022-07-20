@@ -77,21 +77,21 @@ public class FormWisata extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Id                         :");
+        jLabel3.setText("Id Wisata                      :");
 
         txtId.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtId.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Paket                   :");
+        jLabel4.setText("Paket Wisata                   :");
 
         txttourPackages.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txttourPackages.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Harga                  :");
+        jLabel5.setText("Harga Wisata                  :");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
@@ -172,7 +172,7 @@ public class FormWisata extends javax.swing.JFrame {
         jLabel12.setText("Paket Menu          :");
 
         cbFood.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbFood.setForeground(new java.awt.Color(0, 0, 0));
+        cbFood.setForeground(new java.awt.Color(102, 102, 102));
         cbFood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paket Makanan" }));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -180,7 +180,7 @@ public class FormWisata extends javax.swing.JFrame {
         jLabel13.setText("Tambah Paket Menu :");
 
         cbAddFood.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbAddFood.setForeground(new java.awt.Color(0, 0, 0));
+        cbAddFood.setForeground(new java.awt.Color(102, 102, 102));
         cbAddFood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Add Paket Makanan" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -258,9 +258,9 @@ public class FormWisata extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addComponent(txtnTransport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(cbFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -268,13 +268,11 @@ public class FormWisata extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(cbAddFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -284,7 +282,7 @@ public class FormWisata extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -383,118 +381,6 @@ public class FormWisata extends javax.swing.JFrame {
     private javax.swing.JTextField txtnTransport;
     private javax.swing.JTextField txttourPackages;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnClear() {
-        return btnClear;
-    }
-
-    public void setBtnClear(JButton btnClear) {
-        this.btnClear = btnClear;
-    }
-
-    public JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(JButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public JButton getBtnInsert() {
-        return btnInsert;
-    }
-
-    public void setBtnInsert(JButton btnInsert) {
-        this.btnInsert = btnInsert;
-    }
-
-    public JButton getBtnUpdate() {
-        return btnUpdate;
-    }
-
-    public void setBtnUpdate(JButton btnUpdate) {
-        this.btnUpdate = btnUpdate;
-    }
-
-    public JComboBox<String> getCbAddFood() {
-        return cbAddFood;
-    }
-
-    public void setCbAddFood(JComboBox<String> cbAddFood) {
-        this.cbAddFood = cbAddFood;
-    }
-
-    public JComboBox<String> getCbFood() {
-        return cbFood;
-    }
-
-    public void setCbFood(JComboBox<String> cbFood) {
-        this.cbFood = cbFood;
-    }
-
-    public JTable getTblTour() {
-        return tblTour;
-    }
-
-    public void setTblTour(JTable tblTour) {
-        this.tblTour = tblTour;
-    }
-
-    public JTextField getTxtId() {
-        return txtId;
-    }
-
-    public void setTxtId(JTextField txtId) {
-        this.txtId = txtId;
-    }
-
-    public JTextField getTxttourPackages() {
-        return txttourPackages;
-    }
-
-    public void setTxttourPackages(JTextField txttourPackages) {
-        this.txttourPackages = txttourPackages;
-    }
-
-    public JTextField getTxtPrice() {
-        return txtPrice;
-    }
-
-    public void setTxtPrice(JTextField txtPrice) {
-        this.txtPrice = txtPrice;
-    }
-
-    public JTextField getTxtiLodging() {
-        return txtiLodging;
-    }
-
-    public void setTxtiLodging(JTextField txtiLodging) {
-        this.txtiLodging = txtiLodging;
-    }
-
-    public JTextField getTxtiTransport() {
-        return txtiTransport;
-    }
-
-    public void setTxtiTransport(JTextField txtiTransport) {
-        this.txtiTransport = txtiTransport;
-    }
-
-    public JTextField getTxtnLodging() {
-        return txtnLodging;
-    }
-
-    public void setTxtnLodging(JTextField txtnLodging) {
-        this.txtnLodging = txtnLodging;
-    }
-
-    public JTextField getTxtnTransport() {
-        return txtnTransport;
-    }
-
-    public void setTxtnTransport(JTextField txtnTransport) {
-        this.txtnTransport = txtnTransport;
-    }
 
     
     
