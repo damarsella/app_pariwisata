@@ -1,7 +1,6 @@
 package pariwisata.view.penginapan;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -70,7 +69,7 @@ public class FormPenginapan extends javax.swing.JFrame {
         btnInsert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnInsert.setForeground(new java.awt.Color(0, 0, 0));
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/insert.png"))); // NOI18N
-        btnInsert.setText("Save");
+        btnInsert.setText("Insert");
         btnInsert.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,6 +240,52 @@ public class FormPenginapan extends javax.swing.JFrame {
     private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
 
-    
+    public JButton getBtnClear() {
+        return btnClear;
+    }
+
+    public void setBtnClear(JButton btnClear) {
+        this.btnClear = btnClear;
+    }
+
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(JButton btnDelete) {
+        this.btnDelete = btnDelete;
+    }
+
+    public JButton getBtnInsert() {
+        return btnInsert;
+    }
+
+    public void setBtnInsert(JButton btnInsert) {
+        this.btnInsert = btnInsert;
+    }
+
+    public JButton getBtnUpdate() {
+        return btnUpdate;
+    }
+
+    public void setBtnUpdate(JButton btnUpdate) {
+        this.btnUpdate = btnUpdate;
+    }
+
+    public JTable getTblPenginapan() {
+        return tblPenginapan;
+    }
+
+    public void setTblPenginapan(JTable tblPenginapan) {
+        this.tblPenginapan = tblPenginapan;
+    }
+
+    public JTextField getTxtNama() {
+        return txtNama;
+    }
+
+    public void setTxtNama(JTextField txtNama) {
+        this.txtNama = txtNama;
+    }
     
 }

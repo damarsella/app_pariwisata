@@ -216,7 +216,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/pariwisata/img/insert.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Save"/>
+                <Property name="text" type="java.lang.String" value="Insert"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
               <Events>
