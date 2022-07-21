@@ -1,10 +1,10 @@
 package Koneksi;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-public class Koneksi {
+public class Conn {
      private static java.sql.Connection koneksi;
      
-      public static java.sql.Connection getKoneksi(){
+      public static java.sql.Connection getConnection(){
         if(koneksi == null){
           try{
               String url = "jdbc:mysql://localhost/pulaupari";

@@ -1,14 +1,103 @@
 package pariwisata.view.penginapan;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pariwisata.model.penginapan.Penginapan;
+import pariwisata.model.penginapan.PenginapanJdbc;
+import pariwisata.model.penginapan.PenginapanJdbcImplement;
 
 public class FormPenginapan extends javax.swing.JFrame {
 
+    private final PenginapanJdbc penginapanJdbc;
+    private Boolean clickTable;
+    private DefaultTableModel defaultTableModel;
+
     public FormPenginapan() {
         initComponents();
+        penginapanJdbc = new PenginapanJdbcImplement();
+        initTable();
+        loadTable();
+    }
+
+    private void initTable() {
+        defaultTableModel = new DefaultTableModel();
+        defaultTableModel.addColumn("No");
+        defaultTableModel.addColumn("Name");
+        tblPenginapan.setModel(defaultTableModel);
+    }
+
+    private void loadTable() {
+        defaultTableModel.getDataVector().removeAllElements();
+        defaultTableModel.fireTableDataChanged();
+        List<Penginapan> responses = penginapanJdbc.selectAll();
+        if (responses != null) {
+            Object[] objects = new Object[5];
+            for (Penginapan response : responses) {
+                objects[0] = response.getId();
+                objects[1] = response.getNama();
+                defaultTableModel.addRow(objects);
+            }
+            clickTable = false;
+        }
+    }
+
+    private void clickTable() {
+        txtNama.setText(defaultTableModel.getValueAt(tblPenginapan.getSelectedRow(), 1).toString());
+        clickTable = true;
+    }
+
+    private void empty() {
+        txtNama.setText("");
+    }
+
+    private void performSave() {
+        if (!txtNama.getText().isEmpty()) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to save new data ?", "Info", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                Penginapan request = new Penginapan();
+                request.setId(0L);
+                request.setNama(txtNama.getText());
+                penginapanJdbc.insert(request);
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully save data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void performUpdate() {
+        if (clickTable) {
+            if (!txtNama.getText().isEmpty()) {
+                if (JOptionPane.showConfirmDialog(null, "Do you want to update data by id " + defaultTableModel.getValueAt(tblPenginapan.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                    Penginapan request = new Penginapan();
+                    request.setId(Long.parseLong(defaultTableModel.getValueAt(tblPenginapan.getSelectedRow(), 0).toString()));
+                    request.setNama(txtNama.getText());
+                    penginapanJdbc.update(request);
+                    loadTable();
+                    empty();
+                    JOptionPane.showMessageDialog(null, "Successfully update data", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void performDelete() {
+        if (clickTable) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to delete data by id " + defaultTableModel.getValueAt(tblPenginapan.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                penginapanJdbc.delete(Long.parseLong(defaultTableModel.getValueAt(tblPenginapan.getSelectedRow(), 0).toString()));
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully delete data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -84,6 +173,11 @@ public class FormPenginapan extends javax.swing.JFrame {
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/update.png"))); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setBackground(new java.awt.Color(102, 255, 102));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -91,6 +185,11 @@ public class FormPenginapan extends javax.swing.JFrame {
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/delete.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnClear.setBackground(new java.awt.Color(102, 255, 102));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -98,6 +197,11 @@ public class FormPenginapan extends javax.swing.JFrame {
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/close.png"))); // NOI18N
         btnClear.setText("Clear");
         btnClear.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         tblPenginapan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +211,11 @@ public class FormPenginapan extends javax.swing.JFrame {
                 "Id", "Nama"
             }
         ));
+        tblPenginapan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPenginapanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPenginapan);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -195,28 +304,40 @@ public class FormPenginapan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        // TODO add your handling code here:
+        performSave();
     }//GEN-LAST:event_btnInsertActionPerformed
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        performUpdate();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        performDelete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        empty();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void tblPenginapanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPenginapanMouseClicked
+        clickTable();
+    }//GEN-LAST:event_tblPenginapanMouseClicked
+
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormPenginapan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormPenginapan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormPenginapan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormPenginapan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FormPenginapan.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -240,7 +361,4 @@ public class FormPenginapan extends javax.swing.JFrame {
     private javax.swing.JTable tblPenginapan;
     private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
-
-    
-    
 }

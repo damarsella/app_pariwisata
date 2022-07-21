@@ -1,14 +1,109 @@
 package pariwisata.view.pengunjung;
 
+import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import pariwisata.model.pengunjung.Pengunjung;
+import pariwisata.model.pengunjung.PengunjungJdbc;
+import pariwisata.model.pengunjung.PengunjungJdbcImplement;
 
 public class FormPengunjung extends javax.swing.JFrame {
+    
+    private final PengunjungJdbc pengunjungJdbc;
+    private Boolean clickTable;
+    private DefaultTableModel defaultTableModel;
 
     public FormPengunjung() {
         initComponents();
+        pengunjungJdbc = new PengunjungJdbcImplement();
+        initTable();
+        loadTable();
+    }
+    
+    private void initTable() {
+        defaultTableModel = new DefaultTableModel();
+        defaultTableModel.addColumn("No");
+        defaultTableModel.addColumn("Name");
+        tblPengunjung.setModel(defaultTableModel);
+    }
+
+    private void loadTable() {
+        defaultTableModel.getDataVector().removeAllElements();
+        defaultTableModel.fireTableDataChanged();
+        List<Pengunjung> responses = pengunjungJdbc.selectAll();
+        if (responses != null) {
+            Object[] objects = new Object[5];
+            for (Pengunjung response : responses) {
+                objects[0] = response.getId();
+                objects[1] = response.getNama();
+                defaultTableModel.addRow(objects);
+            }
+            clickTable = false;
+        }
+    }
+
+    private void clickTable() {
+        txtNama.setText(defaultTableModel.getValueAt(tblPengunjung.getSelectedRow(), 1).toString());
+        clickTable = true;
+    }
+
+    private void empty() {
+        txtNama.setText("");
+    }
+
+    private void performSave() {
+        if (!txtNama.getText().isEmpty()) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to save new data ?", "Info", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                Pengunjung request = new Pengunjung();
+                request.setId(0L);
+                request.setNama(txtNama.getText());
+                request.setAlamat(txtAlamat.getText());
+                pengunjungJdbc.insert(request);
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully save data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void performUpdate() {
+        if (clickTable) {
+            if (!txtNama.getText().isEmpty()) {
+                if (JOptionPane.showConfirmDialog(null, "Do you want to update data by id " + defaultTableModel.getValueAt(tblPengunjung.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                    Pengunjung request = new Pengunjung();
+                    request.setId(Long.parseLong(defaultTableModel.getValueAt(tblPengunjung.getSelectedRow(), 0).toString()));
+                    request.setNama(txtNama.getText());
+                    request.setAlamat(txtAlamat.getText());
+                    pengunjungJdbc.update(request);
+                    loadTable();
+                    empty();
+                    JOptionPane.showMessageDialog(null, "Successfully update data", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void performDelete() {
+        if (clickTable) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to delete data by id " + defaultTableModel.getValueAt(tblPengunjung.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                pengunjungJdbc.delete(Long.parseLong(defaultTableModel.getValueAt(tblPengunjung.getSelectedRow(), 0).toString()));
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully delete data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -91,6 +186,11 @@ public class FormPengunjung extends javax.swing.JFrame {
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/update.png"))); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setBackground(new java.awt.Color(102, 255, 102));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -98,6 +198,11 @@ public class FormPengunjung extends javax.swing.JFrame {
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/delete.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnClear.setBackground(new java.awt.Color(102, 255, 102));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -105,6 +210,11 @@ public class FormPengunjung extends javax.swing.JFrame {
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/close.png"))); // NOI18N
         btnClear.setText("Clear");
         btnClear.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         tblPengunjung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,6 +224,11 @@ public class FormPengunjung extends javax.swing.JFrame {
                 "Id", "Nama", "Alamat"
             }
         ));
+        tblPengunjung.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPengunjungMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPengunjung);
 
         txtAlamat.setColumns(20);
@@ -216,8 +331,24 @@ public class FormPengunjung extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        // TODO add your handling code here:
+        performSave();
     }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        performUpdate();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        performDelete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        empty();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void tblPengunjungMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPengunjungMouseClicked
+        clickTable();
+    }//GEN-LAST:event_tblPengunjungMouseClicked
 
     public static void main(String args[]) {
         
@@ -264,61 +395,4 @@ public class FormPengunjung extends javax.swing.JFrame {
     private javax.swing.JTextArea txtAlamat;
     private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnClear() {
-        return btnClear;
-    }
-
-    public void setBtnClear(JButton btnClear) {
-        this.btnClear = btnClear;
-    }
-
-    public JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(JButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public JButton getBtnInsert() {
-        return btnInsert;
-    }
-
-    public void setBtnInsert(JButton btnInsert) {
-        this.btnInsert = btnInsert;
-    }
-
-    public JButton getBtnUpdate() {
-        return btnUpdate;
-    }
-
-    public void setBtnUpdate(JButton btnUpdate) {
-        this.btnUpdate = btnUpdate;
-    }
-
-    public JTable getTblPengunjung() {
-        return tblPengunjung;
-    }
-
-    public void setTblPengunjung(JTable tblPengunjung) {
-        this.tblPengunjung = tblPengunjung;
-    }
-
-    public JTextArea getTxtAlamat() {
-        return txtAlamat;
-    }
-
-    public void setTxtAlamat(JTextArea txtAlamat) {
-        this.txtAlamat = txtAlamat;
-    }
-
-    public JTextField getTxtNama() {
-        return txtNama;
-    }
-
-    public void setTxtNama(JTextField txtNama) {
-        this.txtNama = txtNama;
-    }
-
 }
