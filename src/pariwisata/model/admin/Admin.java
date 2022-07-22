@@ -2,17 +2,17 @@ package pariwisata.model.admin;
 
 public class Admin {
     
-    private int id;
+    private Long id;
     private String nama;
     private String user;
     private String password;
     private String role;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,6 +52,5 @@ public class Admin {
     public String toString() {
         return "Admin{" + "id=" + id + ", nama=" + nama + ", user=" + user + ", password=" + password + ", role=" + role + '}';
     }
-    
     
 }

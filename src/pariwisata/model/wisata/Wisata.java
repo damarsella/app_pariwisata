@@ -3,14 +3,14 @@ package pariwisata.model.wisata;
 public class Wisata {
     
     private Long id;
-    private String tourPackages;
-    private String price;
-    private String idLodging;
-    private String nameLodging;
-    private String idTransport;
-    private String nameTrasport;
-    private String foodPackage;
-    private String addFoodPackage;
+    private String paket;
+    private int harga;
+    private int id_penginapan;
+    private String nama_penginapan;
+    private int id_transportasi;
+    private String nama_transportasi;
+    private String deskripsi_makanan_minuman;
+    private String deskripsi_tambahan;
 
     public Long getId() {
         return id;
@@ -20,73 +20,73 @@ public class Wisata {
         this.id = id;
     }
 
-    public String getTourPackages() {
-        return tourPackages;
+    public String getPaket() {
+        return paket;
     }
 
-    public void setTourPackages(String tourPackages) {
-        this.tourPackages = tourPackages;
+    public void setPaket(String paket) {
+        this.paket = paket;
     }
 
-    public String getPrice() {
-        return price;
+    public int getHarga() {
+        return harga;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setHarga(int harga) {
+        this.harga = harga;
     }
 
-    public String getIdLodging() {
-        return idLodging;
+    public int getId_penginapan() {
+        return id_penginapan;
     }
 
-    public void setIdLodging(String idLodging) {
-        this.idLodging = idLodging;
+    public void setId_penginapan(int id_penginapan) {
+        this.id_penginapan = id_penginapan;
     }
 
-    public String getNameLodging() {
-        return nameLodging;
+    public String getNama_penginapan() {
+        return nama_penginapan;
     }
 
-    public void setNameLodging(String nameLodging) {
-        this.nameLodging = nameLodging;
+    public void setNama_penginapan(String nama_penginapan) {
+        this.nama_penginapan = nama_penginapan;
     }
 
-    public String getIdTransport() {
-        return idTransport;
+    public int getId_transportasi() {
+        return id_transportasi;
     }
 
-    public void setIdTransport(String idTransport) {
-        this.idTransport = idTransport;
+    public void setId_transportasi(int id_transportasi) {
+        this.id_transportasi = id_transportasi;
     }
 
-    public String getNameTrasport() {
-        return nameTrasport;
+    public String getNama_transportasi() {
+        return nama_transportasi;
     }
 
-    public void setNameTrasport(String nameTrasport) {
-        this.nameTrasport = nameTrasport;
+    public void setNama_transportasi(String nama_transportasi) {
+        this.nama_transportasi = nama_transportasi;
     }
 
-    public String getFoodPackage() {
-        return foodPackage;
+    public String getDeskripsi_makanan_minuman() {
+        return deskripsi_makanan_minuman;
     }
 
-    public void setFoodPackage(String foodPackage) {
-        this.foodPackage = foodPackage;
+    public void setDeskripsi_makanan_minuman(String deskripsi_makanan_minuman) {
+        this.deskripsi_makanan_minuman = deskripsi_makanan_minuman;
     }
 
-    public String getAddFoodPackage() {
-        return addFoodPackage;
+    public String getDeskripsi_tambahan() {
+        return deskripsi_tambahan;
     }
 
-    public void setAddFoodPackage(String addFoodPackage) {
-        this.addFoodPackage = addFoodPackage;
+    public void setDeskripsi_tambahan(String deskripsi_tambahan) {
+        this.deskripsi_tambahan = deskripsi_tambahan;
     }
 
     @Override
     public String toString() {
-        return "Wisata{" + "id=" + id + ", tourPackages=" + tourPackages + ", price=" + price + ", idLodging=" + idLodging + ", nameLodging=" + nameLodging + ", idTransport=" + idTransport + ", nameTrasport=" + nameTrasport + ", foodPackage=" + foodPackage + ", addFoodPackage=" + addFoodPackage + '}';
+        return "Wisata{" + "id=" + id + ", paket=" + paket + ", harga=" + harga + ", id_penginapan=" + id_penginapan + ", nama_penginapan=" + nama_penginapan + ", id_transportasi=" + id_transportasi + ", nama_transportasi=" + nama_transportasi + ", deskripsi_makanan_minuman=" + deskripsi_makanan_minuman + ", deskripsi_tambahan=" + deskripsi_tambahan + '}';
     }
-    
+     
 }

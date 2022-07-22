@@ -1,11 +1,7 @@
 package pariwisata.view.pengunjung;
 
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import pariwisata.model.pengunjung.Pengunjung;
 import pariwisata.model.pengunjung.PengunjungJdbc;

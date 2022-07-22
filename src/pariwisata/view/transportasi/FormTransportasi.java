@@ -1,14 +1,103 @@
 package pariwisata.view.transportasi;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pariwisata.model.transport.Transportasi;
+import pariwisata.model.transport.TransportasiJdbc;
+import pariwisata.model.transport.TransportasiJdbcImplement;
 
 public class FormTransportasi extends javax.swing.JFrame {
+    
+    private final TransportasiJdbc transportasiJdbc;
+    private Boolean clickTable;
+    private DefaultTableModel defaultTableModel;
 
     public FormTransportasi() {
         initComponents();
+        transportasiJdbc = new TransportasiJdbcImplement();
+        initTable();
+        loadTable();
+    }
+    
+    private void initTable() {
+        defaultTableModel = new DefaultTableModel();
+        defaultTableModel.addColumn("No");
+        defaultTableModel.addColumn("Name");
+        tblTransportasi.setModel(defaultTableModel);
+    }
+
+    private void loadTable() {
+        defaultTableModel.getDataVector().removeAllElements();
+        defaultTableModel.fireTableDataChanged();
+        List<Transportasi> responses = transportasiJdbc.selectAll();
+        if (responses != null) {
+            Object[] objects = new Object[5];
+            for (Transportasi response : responses) {
+                objects[0] = response.getId();
+                objects[1] = response.getNama();
+                defaultTableModel.addRow(objects);
+            }
+            clickTable = false;
+        }
+    }
+
+    private void clickTable() {
+        txtNama.setText(defaultTableModel.getValueAt(tblTransportasi.getSelectedRow(), 1).toString());
+        clickTable = true;
+    }
+
+    private void empty() {
+        txtNama.setText("");
+    }
+
+    private void performSave() {
+        if (!txtNama.getText().isEmpty()) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to save new data ?", "Info", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                Transportasi request = new Transportasi();
+                request.setId(0L);
+                request.setNama(txtNama.getText());
+                transportasiJdbc.insert(request);
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully save data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void performUpdate() {
+        if (clickTable) {
+            if (!txtNama.getText().isEmpty()) {
+                if (JOptionPane.showConfirmDialog(null, "Do you want to update data by id " + defaultTableModel.getValueAt(tblTransportasi.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                    Transportasi request = new Transportasi();
+                    request.setId(Long.parseLong(defaultTableModel.getValueAt(tblTransportasi.getSelectedRow(), 0).toString()));
+                    request.setNama(txtNama.getText());
+                    transportasiJdbc.update(request);
+                    loadTable();
+                    empty();
+                    JOptionPane.showMessageDialog(null, "Successfully update data", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void performDelete() {
+        if (clickTable) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to delete data by id " + defaultTableModel.getValueAt(tblTransportasi.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                transportasiJdbc.delete(Long.parseLong(defaultTableModel.getValueAt(tblTransportasi.getSelectedRow(), 0).toString()));
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully delete data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -74,6 +163,11 @@ public class FormTransportasi extends javax.swing.JFrame {
                 "Id", "Nama Transport"
             }
         ));
+        tblTransportasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTransportasiMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTransportasi);
 
         btnInsert.setBackground(new java.awt.Color(102, 255, 102));
@@ -94,6 +188,11 @@ public class FormTransportasi extends javax.swing.JFrame {
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/update.png"))); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setBackground(new java.awt.Color(102, 255, 102));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -101,6 +200,11 @@ public class FormTransportasi extends javax.swing.JFrame {
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/delete.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnClear.setBackground(new java.awt.Color(102, 255, 102));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -108,6 +212,11 @@ public class FormTransportasi extends javax.swing.JFrame {
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/close.png"))); // NOI18N
         btnClear.setText("Clear");
         btnClear.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -195,7 +304,28 @@ public class FormTransportasi extends javax.swing.JFrame {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
+         performSave();
     }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        performUpdate();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        performDelete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        empty();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void tblTransportasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTransportasiMouseClicked
+        // TODO add your handling code here:
+        clickTable();
+    }//GEN-LAST:event_tblTransportasiMouseClicked
 
     public static void main(String args[]) {
         
@@ -240,52 +370,5 @@ public class FormTransportasi extends javax.swing.JFrame {
     private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
 
-    public JButton getBtnClear() {
-        return btnClear;
-    }
-
-    public void setBtnClear(JButton btnClear) {
-        this.btnClear = btnClear;
-    }
-
-    public JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(JButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public JButton getBtnInsert() {
-        return btnInsert;
-    }
-
-    public void setBtnInsert(JButton btnInsert) {
-        this.btnInsert = btnInsert;
-    }
-
-    public JButton getBtnUpdate() {
-        return btnUpdate;
-    }
-
-    public void setBtnUpdate(JButton btnUpdate) {
-        this.btnUpdate = btnUpdate;
-    }
-
-    public JTable getTblTransportasi() {
-        return tblTransportasi;
-    }
-
-    public void setTblTransportasi(JTable tblTransportasi) {
-        this.tblTransportasi = tblTransportasi;
-    }
-
-    public JTextField getTxtNama() {
-        return txtNama;
-    }
-
-    public void setTxtNama(JTextField txtNama) {
-        this.txtNama = txtNama;
-    }
     
 }

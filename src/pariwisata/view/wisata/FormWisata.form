@@ -148,15 +148,15 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txttourPackages" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtPktWisata" alignment="1" max="32767" attributes="0"/>
                           <Component id="txtId" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtnLodging" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtnTransport" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtiTransport" max="32767" attributes="0"/>
-                          <Component id="txtPrice" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtiLodging" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cbFood" max="32767" attributes="0"/>
-                          <Component id="cbAddFood" max="32767" attributes="0"/>
+                          <Component id="txtNmPenginapan" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtNmTransportasi" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtIdTransportasi" max="32767" attributes="0"/>
+                          <Component id="txtHrgWisata" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtIdPenginapan" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cbxPktMenu" max="32767" attributes="0"/>
+                          <Component id="cbxTambahPktMenu" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -188,33 +188,33 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txttourPackages" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPktWisata" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtPrice" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtHrgWisata" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtiLodging" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtIdPenginapan" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtnLodging" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNmPenginapan" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtiTransport" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtIdTransportasi" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtnTransport" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNmTransportasi" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jScrollPane1" min="-2" pref="268" max="-2" attributes="0"/>
@@ -224,12 +224,12 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbFood" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbxPktMenu" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbAddFood" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbxTambahPktMenu" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -277,7 +277,7 @@
                 <Property name="text" type="java.lang.String" value="Paket Wisata                   :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txttourPackages">
+            <Component class="javax.swing.JTextField" name="txtPktWisata">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>
@@ -320,7 +320,7 @@
                 <Property name="text" type="java.lang.String" value="Nama Penginapan :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtnLodging">
+            <Component class="javax.swing.JTextField" name="txtNmPenginapan">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>
@@ -351,7 +351,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtnTransport">
+            <Component class="javax.swing.JTextField" name="txtNmTransportasi">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>
@@ -433,7 +433,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblTour">
+                <Component class="javax.swing.JTable" name="tblWisata">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="9" rowCount="0">
@@ -515,7 +515,7 @@
                 <Property name="text" type="java.lang.String" value="Id Transportasi    :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtiTransport">
+            <Component class="javax.swing.JTextField" name="txtIdTransportasi">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>
@@ -525,7 +525,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPrice">
+            <Component class="javax.swing.JTextField" name="txtHrgWisata">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>
@@ -535,7 +535,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtiLodging">
+            <Component class="javax.swing.JTextField" name="txtIdPenginapan">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>
@@ -556,7 +556,7 @@
                 <Property name="text" type="java.lang.String" value="Paket Menu          :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbFood">
+            <Component class="javax.swing.JComboBox" name="cbxPktMenu">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>
@@ -585,7 +585,7 @@
                 <Property name="text" type="java.lang.String" value="Tambah Paket Menu :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbAddFood">
+            <Component class="javax.swing.JComboBox" name="cbxTambahPktMenu">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>

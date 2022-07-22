@@ -1,10 +1,5 @@
 package pariwisata.view.wisata;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-
 public class FormWisata extends javax.swing.JFrame {
 
     public FormWisata() {
@@ -23,27 +18,27 @@ public class FormWisata extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txttourPackages = new javax.swing.JTextField();
+        txtPktWisata = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtnLodging = new javax.swing.JTextField();
+        txtNmPenginapan = new javax.swing.JTextField();
         btnInsert = new javax.swing.JButton();
-        txtnTransport = new javax.swing.JTextField();
+        txtNmTransportasi = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblTour = new javax.swing.JTable();
+        tblWisata = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        txtiTransport = new javax.swing.JTextField();
-        txtPrice = new javax.swing.JTextField();
-        txtiLodging = new javax.swing.JTextField();
+        txtIdTransportasi = new javax.swing.JTextField();
+        txtHrgWisata = new javax.swing.JTextField();
+        txtIdPenginapan = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        cbFood = new javax.swing.JComboBox<>();
+        cbxPktMenu = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        cbAddFood = new javax.swing.JComboBox<>();
+        cbxTambahPktMenu = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,8 +81,8 @@ public class FormWisata extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Paket Wisata                   :");
 
-        txttourPackages.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txttourPackages.setForeground(new java.awt.Color(0, 0, 0));
+        txtPktWisata.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtPktWisata.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
@@ -101,8 +96,8 @@ public class FormWisata extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Nama Penginapan :");
 
-        txtnLodging.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtnLodging.setForeground(new java.awt.Color(0, 0, 0));
+        txtNmPenginapan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtNmPenginapan.setForeground(new java.awt.Color(0, 0, 0));
 
         btnInsert.setBackground(new java.awt.Color(102, 255, 102));
         btnInsert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -116,8 +111,8 @@ public class FormWisata extends javax.swing.JFrame {
             }
         });
 
-        txtnTransport.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtnTransport.setForeground(new java.awt.Color(0, 0, 0));
+        txtNmTransportasi.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtNmTransportasi.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
@@ -144,7 +139,7 @@ public class FormWisata extends javax.swing.JFrame {
         btnClear.setText("Clear");
         btnClear.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
-        tblTour.setModel(new javax.swing.table.DefaultTableModel(
+        tblWisata.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -152,36 +147,36 @@ public class FormWisata extends javax.swing.JFrame {
                 "Id", "Paket", "Harga", "Id Penginapan", "Nm Penginapan", "Id Transport", "Nm Transport", "Paket Menu", "Add Paket Menu"
             }
         ));
-        jScrollPane1.setViewportView(tblTour);
+        jScrollPane1.setViewportView(tblWisata);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Id Transportasi    :");
 
-        txtiTransport.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtiTransport.setForeground(new java.awt.Color(0, 0, 0));
+        txtIdTransportasi.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtIdTransportasi.setForeground(new java.awt.Color(0, 0, 0));
 
-        txtPrice.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtPrice.setForeground(new java.awt.Color(0, 0, 0));
+        txtHrgWisata.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtHrgWisata.setForeground(new java.awt.Color(0, 0, 0));
 
-        txtiLodging.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtiLodging.setForeground(new java.awt.Color(0, 0, 0));
+        txtIdPenginapan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtIdPenginapan.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
         jLabel12.setText("Paket Menu          :");
 
-        cbFood.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbFood.setForeground(new java.awt.Color(102, 102, 102));
-        cbFood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paket Makanan" }));
+        cbxPktMenu.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        cbxPktMenu.setForeground(new java.awt.Color(102, 102, 102));
+        cbxPktMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paket Makanan" }));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setText("Tambah Paket Menu :");
 
-        cbAddFood.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbAddFood.setForeground(new java.awt.Color(102, 102, 102));
-        cbAddFood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Add Paket Makanan" }));
+        cbxTambahPktMenu.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        cbxTambahPktMenu.setForeground(new java.awt.Color(102, 102, 102));
+        cbxTambahPktMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Add Paket Makanan" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -201,15 +196,15 @@ public class FormWisata extends javax.swing.JFrame {
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txttourPackages)
+                    .addComponent(txtPktWisata)
                     .addComponent(txtId)
-                    .addComponent(txtnLodging)
-                    .addComponent(txtnTransport)
-                    .addComponent(txtiTransport)
-                    .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtiLodging, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbFood, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbAddFood, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNmPenginapan)
+                    .addComponent(txtNmTransportasi)
+                    .addComponent(txtIdTransportasi)
+                    .addComponent(txtHrgWisata, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIdPenginapan, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxPktMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxTambahPktMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,39 +230,39 @@ public class FormWisata extends javax.swing.JFrame {
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txttourPackages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPktWisata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtHrgWisata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(txtiLodging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIdPenginapan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(13, 13, 13)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(txtnLodging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNmPenginapan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(txtiTransport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIdTransportasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(txtnTransport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtNmTransportasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(cbFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxPktMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(cbAddFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbxTambahPktMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -355,8 +350,8 @@ public class FormWisata extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> cbAddFood;
-    private javax.swing.JComboBox<String> cbFood;
+    private javax.swing.JComboBox<String> cbxPktMenu;
+    private javax.swing.JComboBox<String> cbxTambahPktMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -372,16 +367,14 @@ public class FormWisata extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblTour;
+    private javax.swing.JTable tblWisata;
+    private javax.swing.JTextField txtHrgWisata;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtiLodging;
-    private javax.swing.JTextField txtiTransport;
-    private javax.swing.JTextField txtnLodging;
-    private javax.swing.JTextField txtnTransport;
-    private javax.swing.JTextField txttourPackages;
+    private javax.swing.JTextField txtIdPenginapan;
+    private javax.swing.JTextField txtIdTransportasi;
+    private javax.swing.JTextField txtNmPenginapan;
+    private javax.swing.JTextField txtNmTransportasi;
+    private javax.swing.JTextField txtPktWisata;
     // End of variables declaration//GEN-END:variables
 
-    
-    
 }

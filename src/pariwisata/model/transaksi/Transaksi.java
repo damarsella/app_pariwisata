@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Transaksi {
     
-    private int id;
+    private Long id;
     private int id_wisata;
     private String paket_wisata;
     private int harga_wisata;
@@ -19,11 +19,11 @@ public class Transaksi {
     private Date sampai;
     private int total_tanggal;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
