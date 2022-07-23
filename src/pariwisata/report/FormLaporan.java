@@ -1,11 +1,10 @@
 package pariwisata.report;
 
 import Koneksi.Conn;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -15,31 +14,95 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import org.apache.log4j.Logger;
+import pariwisata.model.admin.Admin;
 
 public class FormLaporan extends javax.swing.JFrame {
-    
+
     private final Connection connection;
     private static final Logger logger = Logger.getLogger(FormLaporan.class);
 
     public FormLaporan() {
         initComponents();
         connection = Conn.getConnection();
+        if (Admin.userLogin.equals("Bagian Keuangan")) {
+            btnLNPemesanan.setEnabled(false);
+            btnLPVTransfer.setEnabled(false);
+            btnLWisata.setEnabled(false);
+            btnLPengunjung.setEnabled(false);
+            btnLPengunjung.setEnabled(false);
+        } 
     }
-    
-    // MASIH SALAH DI SINI
+
     private void printPemesanan() {
         try {
             HashMap parameter = new HashMap();
-            InputStream file = new FileInputStream("pariwisata/report/Nota Pemesanan.jrxml");
+            InputStream file = getClass().getResourceAsStream("/pariwisata/report/Nota Pemesanan.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
             JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
             JasperViewer.viewReport(JasperPrint, false);
         } catch (JRException e) {
-            logger.error(e.getMessage());
-        } catch (FileNotFoundException e) {
-            logger.error(e.getMessage());
+            System.out.println(e);
         }
+    }
+
+    private void printWisata() {
+        try {
+            HashMap parameter = new HashMap();
+            InputStream file = getClass().getResourceAsStream("/pariwisata/report/Wisata.jrxml");
+            JasperDesign JasperDesign = JRXmlLoader.load(file);
+            JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+            JasperViewer.viewReport(JasperPrint, false);
+        } catch (JRException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void printPengunjung() {
+        try {
+            HashMap parameter = new HashMap();
+            InputStream file = getClass().getResourceAsStream("/pariwisata/report/Pengunjung.jrxml");
+            JasperDesign JasperDesign = JRXmlLoader.load(file);
+            JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+            JasperViewer.viewReport(JasperPrint, false);
+        } catch (JRException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void printTransfer() {
+        try {
+            HashMap parameter = new HashMap();
+            InputStream file = getClass().getResourceAsStream("/pariwisata/report/Transfer.jrxml");
+            JasperDesign JasperDesign = JRXmlLoader.load(file);
+            JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+            JasperViewer.viewReport(JasperPrint, false);
+        } catch (JRException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void printKeuangan() {
+        if (jDateFrom.getDate() != null && jDateTo.getDate() != null) {
+            try {
+                HashMap parameter = new HashMap();
+                parameter.put("dari", jDateFrom.getDate());
+                parameter.put("sampai", jDateTo.getDate());
+                InputStream file = getClass().getResourceAsStream("/pariwisata/report/Keuangan.jrxml");
+                JasperDesign JasperDesign = JRXmlLoader.load(file);
+                JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+                JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+                JasperViewer.viewReport(JasperPrint, false);
+            } catch (JRException e) {
+                System.out.println(e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Date tidak boleh kosong", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -105,21 +168,41 @@ public class FormLaporan extends javax.swing.JFrame {
         btnLWisata.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLWisata.setForeground(new java.awt.Color(0, 0, 0));
         btnLWisata.setText("Laporan Wisata");
+        btnLWisata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLWisataActionPerformed(evt);
+            }
+        });
 
         btnLPVTransfer.setBackground(new java.awt.Color(102, 255, 102));
         btnLPVTransfer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLPVTransfer.setForeground(new java.awt.Color(0, 0, 0));
         btnLPVTransfer.setText("Laporan Pembayaran Via Transfer");
+        btnLPVTransfer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLPVTransferActionPerformed(evt);
+            }
+        });
 
         btnLPengunjung.setBackground(new java.awt.Color(102, 255, 102));
         btnLPengunjung.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLPengunjung.setForeground(new java.awt.Color(0, 0, 0));
         btnLPengunjung.setText("Laporan Pengunjung");
+        btnLPengunjung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLPengunjungActionPerformed(evt);
+            }
+        });
 
         btnLKeuangan.setBackground(new java.awt.Color(102, 255, 102));
         btnLKeuangan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLKeuangan.setForeground(new java.awt.Color(0, 0, 0));
         btnLKeuangan.setText("Laporan Keuangan");
+        btnLKeuangan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLKeuanganActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -236,8 +319,24 @@ public class FormLaporan extends javax.swing.JFrame {
         printPemesanan();
     }//GEN-LAST:event_btnLNPemesananActionPerformed
 
+    private void btnLWisataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLWisataActionPerformed
+        printWisata();
+    }//GEN-LAST:event_btnLWisataActionPerformed
+
+    private void btnLPVTransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLPVTransferActionPerformed
+        printTransfer();
+    }//GEN-LAST:event_btnLPVTransferActionPerformed
+
+    private void btnLPengunjungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLPengunjungActionPerformed
+        printPengunjung();
+    }//GEN-LAST:event_btnLPengunjungActionPerformed
+
+    private void btnLKeuanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLKeuanganActionPerformed
+        printKeuangan();
+    }//GEN-LAST:event_btnLKeuanganActionPerformed
+
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -248,7 +347,7 @@ public class FormLaporan extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormLaporan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

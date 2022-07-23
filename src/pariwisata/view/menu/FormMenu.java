@@ -1,5 +1,7 @@
 package pariwisata.view.menu;
 
+import pariwisata.model.admin.Admin;
+import pariwisata.report.FormLaporan;
 import pariwisata.view.penginapan.FormPenginapan;
 import pariwisata.view.pengunjung.FormPengunjung;
 import pariwisata.view.transaksi.FormTransaksi;
@@ -10,6 +12,26 @@ public class FormMenu extends javax.swing.JFrame {
 
     public FormMenu() {
         initComponents();
+        switch (Admin.userLogin) {
+            case "Pemilik":
+                btnReport.setEnabled(true);
+                break;
+            case "Bagian Keuangan":
+                btnReport.setEnabled(true);
+                break;
+            case "Admin":
+            case "Operator":
+                btnPengunjung.setEnabled(true);
+                btnLodging.setEnabled(true);
+                btnReport.setEnabled(true);
+                btnTransportation.setEnabled(true);
+                btnTour.setEnabled(true);
+                btnTransaction.setEnabled(true);
+                break;
+            default:
+                dispose();
+                break;
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -83,6 +105,7 @@ public class FormMenu extends javax.swing.JFrame {
         btnPengunjung.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnPengunjung.setForeground(new java.awt.Color(255, 255, 255));
         btnPengunjung.setText("Pengunjung");
+        btnPengunjung.setEnabled(false);
         btnPengunjung.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPengunjung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +119,7 @@ public class FormMenu extends javax.swing.JFrame {
         btnLodging.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnLodging.setForeground(new java.awt.Color(255, 255, 255));
         btnLodging.setText("Penginapan");
+        btnLodging.setEnabled(false);
         btnLodging.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnLodging.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +133,7 @@ public class FormMenu extends javax.swing.JFrame {
         btnTransportation.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnTransportation.setForeground(new java.awt.Color(255, 255, 255));
         btnTransportation.setText("Transportasi");
+        btnTransportation.setEnabled(false);
         btnTransportation.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnTransportation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +147,7 @@ public class FormMenu extends javax.swing.JFrame {
         btnTour.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnTour.setForeground(new java.awt.Color(255, 255, 255));
         btnTour.setText("Wisata");
+        btnTour.setEnabled(false);
         btnTour.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnTour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +161,7 @@ public class FormMenu extends javax.swing.JFrame {
         btnTransaction.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnTransaction.setForeground(new java.awt.Color(255, 255, 255));
         btnTransaction.setText("Transaksi");
+        btnTransaction.setEnabled(false);
         btnTransaction.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnTransaction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +175,13 @@ public class FormMenu extends javax.swing.JFrame {
         btnReport.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnReport.setForeground(new java.awt.Color(255, 255, 255));
         btnReport.setText("Laporan");
+        btnReport.setEnabled(false);
         btnReport.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportActionPerformed(evt);
+            }
+        });
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/report.png"))); // NOI18N
 
@@ -306,6 +339,11 @@ public class FormMenu extends javax.swing.JFrame {
         new FormTransaksi().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTransactionActionPerformed
+
+    private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
+        new FormLaporan().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnReportActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

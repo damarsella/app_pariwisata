@@ -1,6 +1,7 @@
 package pariwisata.view.menu;
 
 import javax.swing.JOptionPane;
+import pariwisata.model.admin.Admin;
 import pariwisata.model.admin.AdminJdbc;
 import pariwisata.model.admin.AdminJdbcImplement;
 
@@ -237,6 +238,8 @@ public class FormLogin extends javax.swing.JFrame {
         if (!txtuserName.getText().isEmpty()) {
             if (!txtuserPassword.getText().isEmpty()) {
                 if(adminJdbc.login(txtuserName.getText(), txtuserPassword.getText())){
+                    String role = adminJdbc.selectRole(txtuserName.getText());
+                    Admin.userLogin = role;
                     JOptionPane.showMessageDialog(null, "Berhasil Login", "Success", JOptionPane.INFORMATION_MESSAGE);
                     perMenu();
                 } else {

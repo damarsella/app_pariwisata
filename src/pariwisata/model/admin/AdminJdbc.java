@@ -10,4 +10,6 @@ public interface AdminJdbc {
 
     public void insert(Admin request);
 
+    public String selectRole(String text);
+
 }

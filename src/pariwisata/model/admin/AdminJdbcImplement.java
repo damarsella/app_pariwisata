@@ -67,4 +67,24 @@ public class AdminJdbcImplement implements AdminJdbc {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    @Override
+    public String selectRole(String text) {
+        String response = new String();
+        try {
+            sql = "select * from admin where user = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, text);
+            logger.debug(preparedStatement.toString());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                response = resultSet.getString("role");
+            }
+            logger.debug(response);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+            logger.error(e.getMessage());
+        }
+        return response;
+    }
 }

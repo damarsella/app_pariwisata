@@ -234,6 +234,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Laporan Wisata"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLWisataActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnLPVTransfer">
               <Properties>
@@ -248,6 +251,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Laporan Pembayaran Via Transfer"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLPVTransferActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnLPengunjung">
               <Properties>
@@ -262,6 +268,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Laporan Pengunjung"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLPengunjungActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnLKeuangan">
               <Properties>
@@ -276,6 +285,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Laporan Keuangan"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLKeuanganActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
