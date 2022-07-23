@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import pariwisata.model.penginapan.Penginapan;
 import pariwisata.model.penginapan.PenginapanJdbc;
 import pariwisata.model.penginapan.PenginapanJdbcImplement;
+import pariwisata.model.pengunjung.Pengunjung;
 import pariwisata.model.transport.Transportasi;
 import pariwisata.model.transport.TransportasiJdbc;
 import pariwisata.model.transport.TransportasiJdbcImplement;
@@ -67,14 +68,14 @@ public class FormWisata extends javax.swing.JFrame {
             clickTable = false;
         }
     }
-    
+
     private void loadComboBoxPenginapan() {
         List<Penginapan> responses = penginapanJdbc.selectAll();
         for (Penginapan response : responses) {
             cbxIdPenginapan.addItem(String.valueOf(response.getId()));
         }
     }
-    
+
     private void loadComboBoxTransportasi() {
         List<Transportasi> responses = transportasiJdbc.selectAll();
         for (Transportasi response : responses) {
@@ -82,17 +83,27 @@ public class FormWisata extends javax.swing.JFrame {
         }
     }
 
+    private void loadTextPenginapan() {
+        Penginapan response = penginapanJdbc.select(Long.parseLong(cbxIdPenginapan.getSelectedItem().toString()));
+        txtNmPenginapan.setText(response.getNama());
+    }
+
+    private void loadTextTransportasi() {
+        Transportasi response = transportasiJdbc.select(Long.parseLong(cbxIdTransportasi.getSelectedItem().toString()));
+        txtNmTransportasi.setText(response.getNama());
+    }
+
     private void clickTable() {
         String paketWisata, hargaWisata, idPenginapan, namaPenginapan, idTransportasi, namaTransportasi, makanan, tambahan;
-        paketWisata         = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 1).toString();
-        hargaWisata         = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 2).toString();
-        idPenginapan        = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 3).toString();
-        namaPenginapan      = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 4).toString();
-        idTransportasi      = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 5).toString();
-        namaTransportasi    = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 6).toString();
-        makanan             = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 7).toString();
-        tambahan            = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 8).toString();
-        
+        paketWisata = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 1).toString();
+        hargaWisata = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 2).toString();
+        idPenginapan = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 3).toString();
+        namaPenginapan = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 4).toString();
+        idTransportasi = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 5).toString();
+        namaTransportasi = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 6).toString();
+        makanan = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 7).toString();
+        tambahan = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 8).toString();
+
         txtPktWisata.setText(paketWisata);
         txtHrgWisata.setText(hargaWisata);
         cbxIdPenginapan.setSelectedItem(idPenginapan);
@@ -259,6 +270,7 @@ public class FormWisata extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Nama Penginapan :");
 
+        txtNmPenginapan.setEditable(false);
         txtNmPenginapan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtNmPenginapan.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -274,6 +286,7 @@ public class FormWisata extends javax.swing.JFrame {
             }
         });
 
+        txtNmTransportasi.setEditable(false);
         txtNmTransportasi.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtNmTransportasi.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -346,6 +359,18 @@ public class FormWisata extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setText("Tambah Paket Menu :");
+
+        cbxIdPenginapan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxIdPenginapanActionPerformed(evt);
+            }
+        });
+
+        cbxIdTransportasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxIdTransportasiActionPerformed(evt);
+            }
+        });
 
         txtMenuMakanan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtMenuMakanan.setForeground(new java.awt.Color(0, 0, 0));
@@ -502,6 +527,14 @@ public class FormWisata extends javax.swing.JFrame {
     private void tblWisataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblWisataMouseClicked
         clickTable();
     }//GEN-LAST:event_tblWisataMouseClicked
+
+    private void cbxIdPenginapanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIdPenginapanActionPerformed
+        loadTextPenginapan();
+    }//GEN-LAST:event_cbxIdPenginapanActionPerformed
+
+    private void cbxIdTransportasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIdTransportasiActionPerformed
+        loadTextTransportasi();
+    }//GEN-LAST:event_cbxIdTransportasiActionPerformed
 
     public static void main(String args[]) {
 

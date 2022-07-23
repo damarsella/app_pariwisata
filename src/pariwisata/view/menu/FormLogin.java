@@ -1,14 +1,27 @@
 package pariwisata.view.menu;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import pariwisata.model.admin.AdminJdbc;
+import pariwisata.model.admin.AdminJdbcImplement;
 
 public class FormLogin extends javax.swing.JFrame {
+    
+    private final AdminJdbc adminJdbc;
 
     public FormLogin() {
         initComponents();
+        adminJdbc = new AdminJdbcImplement();
+    }
+    
+    private void perMenu() {
+        this.setVisible(false);
+        FormMenu formMainMenu = new FormMenu();
+        formMainMenu.setVisible(true);
+    }
+
+    private void empty() {
+        txtuserName.setText("");
+        txtuserPassword.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -82,6 +95,11 @@ public class FormLogin extends javax.swing.JFrame {
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         addAccount.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         addAccount.setForeground(new java.awt.Color(255, 255, 255));
@@ -215,6 +233,26 @@ public class FormLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        if (!txtuserName.getText().isEmpty()) {
+            if (!txtuserPassword.getText().isEmpty()) {
+                if(adminJdbc.login(txtuserName.getText(), txtuserPassword.getText())){
+                    JOptionPane.showMessageDialog(null, "Berhasil Login", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    perMenu();
+                } else {
+                    empty();
+                    JOptionPane.showMessageDialog(null, "Gagal Login", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                empty();
+                JOptionPane.showMessageDialog(null, "Password tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            empty();
+            JOptionPane.showMessageDialog(null, "Username tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -264,37 +302,5 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JTextField txtuserName;
     private javax.swing.JPasswordField txtuserPassword;
     // End of variables declaration//GEN-END:variables
-
-    public JLabel getAddAccount() {
-        return addAccount;
-    }
-
-    public void setAddAccount(JLabel addAccount) {
-        this.addAccount = addAccount;
-    }
-
-    public JButton getBtnLogin() {
-        return btnLogin;
-    }
-
-    public void setBtnLogin(JButton btnLogin) {
-        this.btnLogin = btnLogin;
-    }
-
-    public JTextField getTxtuserName() {
-        return txtuserName;
-    }
-
-    public void setTxtuserName(JTextField txtuserName) {
-        this.txtuserName = txtuserName;
-    }
-
-    public JPasswordField getTxtuserPassword() {
-        return txtuserPassword;
-    }
-
-    public void setTxtuserPassword(JPasswordField txtuserPassword) {
-        this.txtuserPassword = txtuserPassword;
-    }
 
 }

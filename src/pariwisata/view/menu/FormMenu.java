@@ -1,6 +1,10 @@
 package pariwisata.view.menu;
 
-import javax.swing.JButton;
+import pariwisata.view.penginapan.FormPenginapan;
+import pariwisata.view.pengunjung.FormPengunjung;
+import pariwisata.view.transaksi.FormTransaksi;
+import pariwisata.view.transportasi.FormTransportasi;
+import pariwisata.view.wisata.FormWisata;
 
 public class FormMenu extends javax.swing.JFrame {
 
@@ -17,9 +21,7 @@ public class FormMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        btnVisitors = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        btnAdmin = new javax.swing.JButton();
+        btnPengunjung = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnLodging = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -77,19 +79,16 @@ public class FormMenu extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(102, 255, 255));
 
-        btnVisitors.setBackground(new java.awt.Color(0, 0, 102));
-        btnVisitors.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnVisitors.setForeground(new java.awt.Color(255, 255, 255));
-        btnVisitors.setText("Pengunjung");
-        btnVisitors.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/manager.png"))); // NOI18N
-
-        btnAdmin.setBackground(new java.awt.Color(0, 0, 102));
-        btnAdmin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdmin.setText("Admin");
-        btnAdmin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPengunjung.setBackground(new java.awt.Color(0, 0, 102));
+        btnPengunjung.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnPengunjung.setForeground(new java.awt.Color(255, 255, 255));
+        btnPengunjung.setText("Pengunjung");
+        btnPengunjung.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPengunjung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPengunjungActionPerformed(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/visitors.png"))); // NOI18N
 
@@ -98,6 +97,11 @@ public class FormMenu extends javax.swing.JFrame {
         btnLodging.setForeground(new java.awt.Color(255, 255, 255));
         btnLodging.setText("Penginapan");
         btnLodging.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnLodging.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLodgingActionPerformed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/lodging (1).png"))); // NOI18N
 
@@ -106,6 +110,11 @@ public class FormMenu extends javax.swing.JFrame {
         btnTransportation.setForeground(new java.awt.Color(255, 255, 255));
         btnTransportation.setText("Transportasi");
         btnTransportation.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTransportation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransportationActionPerformed(evt);
+            }
+        });
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/transportation.png"))); // NOI18N
 
@@ -114,6 +123,11 @@ public class FormMenu extends javax.swing.JFrame {
         btnTour.setForeground(new java.awt.Color(255, 255, 255));
         btnTour.setText("Wisata");
         btnTour.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTourActionPerformed(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/tour-guide.png"))); // NOI18N
 
@@ -122,6 +136,11 @@ public class FormMenu extends javax.swing.JFrame {
         btnTransaction.setForeground(new java.awt.Color(255, 255, 255));
         btnTransaction.setText("Transaksi");
         btnTransaction.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTransaction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransactionActionPerformed(evt);
+            }
+        });
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/payment-method.png"))); // NOI18N
 
@@ -147,23 +166,17 @@ public class FormMenu extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(120, 120, 120)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPengunjung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLodging, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnVisitors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLodging, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -185,9 +198,25 @@ public class FormMenu extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(btnPengunjung, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnLodging, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
@@ -202,24 +231,7 @@ public class FormMenu extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(btnTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
-                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel11)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(btnVisitors, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLodging, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
@@ -256,7 +268,10 @@ public class FormMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,6 +281,31 @@ public class FormMenu extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPengunjungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPengunjungActionPerformed
+        new FormPengunjung().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnPengunjungActionPerformed
+
+    private void btnLodgingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLodgingActionPerformed
+        new FormPenginapan().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnLodgingActionPerformed
+
+    private void btnTransportationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransportationActionPerformed
+        new FormTransportasi().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTransportationActionPerformed
+
+    private void btnTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTourActionPerformed
+        new FormWisata().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTourActionPerformed
+
+    private void btnTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionActionPerformed
+        new FormTransaksi().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTransactionActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -300,18 +340,16 @@ public class FormMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnLodging;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnPengunjung;
     private javax.swing.JButton btnReport;
     private javax.swing.JButton btnTour;
     private javax.swing.JButton btnTransaction;
     private javax.swing.JButton btnTransportation;
-    private javax.swing.JButton btnVisitors;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -323,69 +361,5 @@ public class FormMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnAdmin() {
-        return btnAdmin;
-    }
-
-    public void setBtnAdmin(JButton btnAdmin) {
-        this.btnAdmin = btnAdmin;
-    }
-
-    public JButton getBtnLodging() {
-        return btnLodging;
-    }
-
-    public void setBtnLodging(JButton btnLodging) {
-        this.btnLodging = btnLodging;
-    }
-
-    public JButton getBtnLogout() {
-        return btnLogout;
-    }
-
-    public void setBtnLogout(JButton btnLogout) {
-        this.btnLogout = btnLogout;
-    }
-
-    public JButton getBtnReport() {
-        return btnReport;
-    }
-
-    public void setBtnReport(JButton btnReport) {
-        this.btnReport = btnReport;
-    }
-
-    public JButton getBtnTour() {
-        return btnTour;
-    }
-
-    public void setBtnTour(JButton btnTour) {
-        this.btnTour = btnTour;
-    }
-
-    public JButton getBtnTransaction() {
-        return btnTransaction;
-    }
-
-    public void setBtnTransaction(JButton btnTransaction) {
-        this.btnTransaction = btnTransaction;
-    }
-
-    public JButton getBtnTransportation() {
-        return btnTransportation;
-    }
-
-    public void setBtnTransportation(JButton btnTransportation) {
-        this.btnTransportation = btnTransportation;
-    }
-
-    public JButton getBtnVisitors() {
-        return btnVisitors;
-    }
-
-    public void setBtnVisitors(JButton btnVisitors) {
-        this.btnVisitors = btnVisitors;
-    }
 
 }

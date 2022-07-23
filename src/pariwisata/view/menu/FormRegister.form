@@ -299,12 +299,11 @@
                   <Font name="Segoe UI" size="16" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
-                    <StringItem index="0" value="Selection"/>
-                    <StringItem index="1" value="Pemilik"/>
-                    <StringItem index="2" value="Admin"/>
-                    <StringItem index="3" value="Operator"/>
-                    <StringItem index="4" value="Bagian Keuangan"/>
+                  <StringArray count="4">
+                    <StringItem index="0" value="Pemilik"/>
+                    <StringItem index="1" value="Admin"/>
+                    <StringItem index="2" value="Operator"/>
+                    <StringItem index="3" value="Bagian Keuangan"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -328,6 +327,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Register"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegisterActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>

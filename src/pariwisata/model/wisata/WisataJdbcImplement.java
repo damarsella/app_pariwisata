@@ -57,6 +57,35 @@ public class WisataJdbcImplement implements WisataJdbc {
             return null;
         }
     }
+    
+    @Override
+    public Wisata select(Long request) {
+        logger.debug(request.toString());
+        Wisata response = new Wisata();
+        try {
+            sql = "select * from wisata where id = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, request);
+            logger.debug(preparedStatement.toString());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                response.setId(resultSet.getLong("id"));
+                response.setPaket(resultSet.getString("paket"));
+                response.setHarga(resultSet.getLong("harga"));
+                response.setId_penginapan(resultSet.getLong("id_penginapan"));
+                response.setNama_penginapan(resultSet.getString("nama_penginapan"));
+                response.setId_transportasi(resultSet.getLong("id_transportasi"));
+                response.setNama_transportasi(resultSet.getString("nama_transportasi"));
+                response.setDeskripsi_makanan_minuman(resultSet.getString("deskripsi_makanan_minuman"));
+                response.setDeskripsi_makanan_minuman(resultSet.getString("deskripsi_tambahan"));
+            }
+            logger.debug(response.toString());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+            logger.error(e.getMessage());
+        }
+        return response;
+    }
 
     @Override
     public void insert(Wisata request) {
@@ -118,6 +147,5 @@ public class WisataJdbcImplement implements WisataJdbc {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
    
 }

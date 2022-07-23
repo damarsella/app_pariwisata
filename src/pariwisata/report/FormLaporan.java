@@ -1,12 +1,44 @@
 package pariwisata.report;
 
-import com.toedter.calendar.JDateChooser;
-import javax.swing.JButton;
+import Koneksi.Conn;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import org.apache.log4j.Logger;
 
 public class FormLaporan extends javax.swing.JFrame {
+    
+    private final Connection connection;
+    private static final Logger logger = Logger.getLogger(FormLaporan.class);
 
     public FormLaporan() {
         initComponents();
+        connection = Conn.getConnection();
+    }
+    
+    private void printPemesanan() {
+        try {
+            HashMap parameter = new HashMap();
+            InputStream file = new FileInputStream("pariwisata/report/Nota Pemesanan.jrxml");
+            JasperDesign JasperDesign = JRXmlLoader.load(file);
+            JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+            JasperViewer.viewReport(JasperPrint, false);
+        } catch (JRException e) {
+            logger.error(e.getMessage());
+        } catch (FileNotFoundException e) {
+            logger.error(e.getMessage());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -62,6 +94,11 @@ public class FormLaporan extends javax.swing.JFrame {
         btnLNPemesanan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLNPemesanan.setForeground(new java.awt.Color(0, 0, 0));
         btnLNPemesanan.setText("Laporan Nota Pemesanan");
+        btnLNPemesanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLNPemesananActionPerformed(evt);
+            }
+        });
 
         btnLWisata.setBackground(new java.awt.Color(102, 255, 102));
         btnLWisata.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -194,6 +231,10 @@ public class FormLaporan extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLNPemesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLNPemesananActionPerformed
+        printPemesanan();
+    }//GEN-LAST:event_btnLNPemesananActionPerformed
+
     public static void main(String args[]) {
         
         try {
@@ -203,13 +244,7 @@ public class FormLaporan extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormLaporan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormLaporan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormLaporan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormLaporan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
@@ -237,61 +272,4 @@ public class FormLaporan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnLKeuangan() {
-        return btnLKeuangan;
-    }
-
-    public void setBtnLKeuangan(JButton btnLKeuangan) {
-        this.btnLKeuangan = btnLKeuangan;
-    }
-
-    public JButton getBtnLNPemesanan() {
-        return btnLNPemesanan;
-    }
-
-    public void setBtnLNPemesanan(JButton btnLNPemesanan) {
-        this.btnLNPemesanan = btnLNPemesanan;
-    }
-
-    public JButton getBtnLPVTransfer() {
-        return btnLPVTransfer;
-    }
-
-    public void setBtnLPVTransfer(JButton btnLPVTransfer) {
-        this.btnLPVTransfer = btnLPVTransfer;
-    }
-
-    public JButton getBtnLPengunjung() {
-        return btnLPengunjung;
-    }
-
-    public void setBtnLPengunjung(JButton btnLPengunjung) {
-        this.btnLPengunjung = btnLPengunjung;
-    }
-
-    public JButton getBtnLWisata() {
-        return btnLWisata;
-    }
-
-    public void setBtnLWisata(JButton btnLWisata) {
-        this.btnLWisata = btnLWisata;
-    }
-
-    public JDateChooser getjDateFrom() {
-        return jDateFrom;
-    }
-
-    public void setjDateFrom(JDateChooser jDateFrom) {
-        this.jDateFrom = jDateFrom;
-    }
-
-    public JDateChooser getjDateTo() {
-        return jDateTo;
-    }
-
-    public void setjDateTo(JDateChooser jDateTo) {
-        this.jDateTo = jDateTo;
-    }
-    
 }

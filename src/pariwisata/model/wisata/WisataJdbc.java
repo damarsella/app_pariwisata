@@ -9,6 +9,8 @@ import java.util.List;
 public interface WisataJdbc {
 
     public List<Wisata> selectAll();
+    
+    public Wisata select(Long request);
 
     public void insert(Wisata request);
 

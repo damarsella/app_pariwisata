@@ -50,6 +50,29 @@ public class TransportasiJdbcImplement implements TransportasiJdbc {
             return null;
         }
     }
+    
+    @Override
+    public Transportasi select(Long request) {
+        logger.debug(request.toString());
+        Transportasi response = new Transportasi();
+        try {
+            sql = "select * from transportasi where id = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, request);
+            logger.debug(preparedStatement.toString());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                response.setId(resultSet.getLong("id"));
+                response.setNama(resultSet.getString("nama"));
+            }
+            logger.debug(response.toString());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+            logger.error(e.getMessage());
+        }
+        return response;
+    }
+
 
     @Override
     public void insert(Transportasi request) {
@@ -97,6 +120,4 @@ public class TransportasiJdbcImplement implements TransportasiJdbc {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-   
 }

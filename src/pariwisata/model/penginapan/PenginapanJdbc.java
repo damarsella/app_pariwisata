@@ -9,6 +9,8 @@ import java.util.List;
 public interface PenginapanJdbc {
 
     public List<Penginapan> selectAll();
+    
+    public Penginapan select(Long request);
 
     public void insert(Penginapan request);
 

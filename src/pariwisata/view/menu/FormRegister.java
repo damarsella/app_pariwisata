@@ -1,15 +1,26 @@
 package pariwisata.view.menu;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import pariwisata.model.admin.Admin;
+import pariwisata.model.admin.AdminJdbc;
+import pariwisata.model.admin.AdminJdbcImplement;
 
 public class FormRegister extends javax.swing.JFrame {
+    
+    private final AdminJdbc adminJdbc;
 
     public FormRegister() {
         initComponents();
+        adminJdbc = new AdminJdbcImplement();
+    }
+    
+    private void empty() {
+        txtPassword.setText("");
+    }
+
+    private void perLogin() {
+        new FormLogin().setVisible(true);
+        dispose();
     }
 
     @SuppressWarnings("unchecked")
@@ -105,7 +116,7 @@ public class FormRegister extends javax.swing.JFrame {
         jLabel12.setText("Sebagai :");
 
         txtRole.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selection", "Pemilik", "Admin", "Operator", "Bagian Keuangan" }));
+        txtRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pemilik", "Admin", "Operator", "Bagian Keuangan" }));
         txtRole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRoleActionPerformed(evt);
@@ -116,6 +127,11 @@ public class FormRegister extends javax.swing.JFrame {
         btnRegister.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnRegister.setForeground(new java.awt.Color(255, 255, 255));
         btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/add.png"))); // NOI18N
 
@@ -239,6 +255,33 @@ public class FormRegister extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRoleActionPerformed
 
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        if (!txtNama.getText().isEmpty()) {
+            if (!txtUser.getText().isEmpty()) {
+                if (!txtPassword.getText().isEmpty()) {
+                    Admin admin = new Admin();
+                    admin.setId(0L);
+                    admin.setNama(txtNama.getText());
+                    admin.setPassword(txtPassword.getText());
+                    admin.setRole(txtRole.getSelectedItem().toString());
+                    admin.setUser(txtUser.getText());
+                    adminJdbc.insert(admin);
+                    JOptionPane.showMessageDialog(null, "Success Register", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    perLogin();
+                } else {
+                    empty();
+                    JOptionPane.showMessageDialog(null, "Password tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            } else {
+                empty();
+                JOptionPane.showMessageDialog(null, "Nama tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            empty();
+            JOptionPane.showMessageDialog(null, "Adminname tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -290,53 +333,5 @@ public class FormRegister extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> txtRole;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnRegister() {
-        return btnRegister;
-    }
-
-    public void setBtnRegister(JButton btnRegister) {
-        this.btnRegister = btnRegister;
-    }
-
-    public JLabel getToLogin() {
-        return toLogin;
-    }
-
-    public void setToLogin(JLabel toLogin) {
-        this.toLogin = toLogin;
-    }
-
-    public JTextField getTxtNama() {
-        return txtNama;
-    }
-
-    public void setTxtNama(JTextField txtNama) {
-        this.txtNama = txtNama;
-    }
-
-    public JPasswordField getTxtPassword() {
-        return txtPassword;
-    }
-
-    public void setTxtPassword(JPasswordField txtPassword) {
-        this.txtPassword = txtPassword;
-    }
-
-    public JComboBox<String> getTxtRole() {
-        return txtRole;
-    }
-
-    public void setTxtRole(JComboBox<String> txtRole) {
-        this.txtRole = txtRole;
-    }
-
-    public JTextField getTxtUser() {
-        return txtUser;
-    }
-
-    public void setTxtUser(JTextField txtUser) {
-        this.txtUser = txtUser;
-    }
 
 }

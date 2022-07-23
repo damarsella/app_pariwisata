@@ -1,19 +1,13 @@
 package pariwisata.model.admin;
 
-import java.util.List;
-
 /**
  *
  * @author Khanza
  */
 public interface AdminJdbc {
 
-    public List<Admin> selectAll();
+    public Boolean login(String userName, String password);
 
     public void insert(Admin request);
-
-    public void update(Admin request);
-    
-    public void delete(Long request);
 
 }

@@ -27,29 +27,25 @@ public class AdminJdbcImplement implements AdminJdbc {
     }
 
     @Override
-    public List<Admin> selectAll() {
-        List<Admin> response = new ArrayList<>();
+    public Boolean login(String userName, String password) {
         try {
-            sql = "SELECT * FROM admin";
+            sql = "SELECT * FROM admin WHERE user = ? AND password = ?";
             preparedStatement = connection.prepareStatement(sql);
-            logger.debug(preparedStatement.toString());
+            preparedStatement.setString(1, userName);
+            preparedStatement.setString(2, password);
+            System.out.println(preparedStatement.toString());
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Admin admin = new Admin();
-                admin.setId(resultSet.getLong("id"));
-                admin.setNama(resultSet.getString("nama"));
-                admin.setUser(resultSet.getString("user"));
-                admin.setPassword(resultSet.getString("password"));
-                admin.setRole(resultSet.getString("role"));
-                response.add(admin);
+            if (resultSet.next()) {
+                resultSet.close();
+                preparedStatement.close();
+                return true;
+            } else {
+                resultSet.close();
+                preparedStatement.close();
+                return false;
             }
-            resultSet.close();
-            preparedStatement.close();
-            logger.debug(response.toString());
-            return response;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
-            logger.error(e.getMessage());
             return null;
         }
     }
@@ -58,13 +54,12 @@ public class AdminJdbcImplement implements AdminJdbc {
     public void insert(Admin request) {
         logger.debug(request.toString());
         try {
-            sql = "INSERT INTO pengunjung (nama, alamat) VALUES(?, ?);";
+            sql = "INSERT INTO admin (nama, `user`, password, `role`) VALUES(?, ?, ?, ?);";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, request.getNama());
             preparedStatement.setString(2, request.getUser());
             preparedStatement.setString(3, request.getPassword());
             preparedStatement.setString(4, request.getRole());
-            preparedStatement.setLong(5, request.getId());
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -72,40 +67,4 @@ public class AdminJdbcImplement implements AdminJdbc {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    @Override
-    public void update(Admin request) {
-        logger.debug(request.toString());
-        try {
-            sql = "UPDATE admin SET nama=?, alamat=? WHERE id=?;";
-            preparedStatement = connection.prepareStatement(sql);            
-            preparedStatement.setString(1, request.getNama());
-            preparedStatement.setString(2, request.getUser());
-            preparedStatement.setString(3, request.getPassword());
-            preparedStatement.setString(4, request.getRole());
-            preparedStatement.setLong(5, request.getId());
-            logger.debug(preparedStatement.toString());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            logger.error(e.getMessage());
-        }
-    }
-
-    @Override
-    public void delete(Long request) {
-        logger.debug(request.toString());
-        try {
-            sql = "DELETE FROM admin WHERE id=?;";
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, request);
-            logger.debug(preparedStatement.toString());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
 }

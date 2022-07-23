@@ -51,6 +51,29 @@ public class PengunjungJdbcImplement implements PengunjungJdbc {
             return null;
         }
     }
+    
+    @Override
+    public Pengunjung select(Long request) {
+        logger.debug(request.toString());
+        Pengunjung response = new Pengunjung();
+        try {
+            sql = "select * from pengunjung where id = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, request);
+            logger.debug(preparedStatement.toString());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                response.setId(resultSet.getLong("id"));
+                response.setNama(resultSet.getString("nama"));
+                response.setAlamat(resultSet.getString("alamat"));
+            }
+            logger.debug(response.toString());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+            logger.error(e.getMessage());
+        }
+        return response;
+    }
 
     @Override
     public void insert(Pengunjung request) {
@@ -100,5 +123,4 @@ public class PengunjungJdbcImplement implements PengunjungJdbc {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 }

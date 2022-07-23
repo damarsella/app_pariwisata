@@ -50,6 +50,28 @@ public class PenginapanJdbcImplement implements PenginapanJdbc {
             return null;
         }
     }
+    
+    @Override
+    public Penginapan select(Long request) {
+        logger.debug(request.toString());
+        Penginapan response = new Penginapan();
+        try {
+            sql = "select * from penginapan where id = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, request);
+            logger.debug(preparedStatement.toString());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                response.setId(resultSet.getLong("id"));
+                response.setNama(resultSet.getString("nama"));
+            }
+            logger.debug(response.toString());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+            logger.error(e.getMessage());
+        }
+        return response;
+    }
 
     @Override
     public void insert(Penginapan request) {
@@ -97,5 +119,4 @@ public class PenginapanJdbcImplement implements PenginapanJdbc {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 }
