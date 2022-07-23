@@ -1,9 +1,181 @@
 package pariwisata.view.wisata;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pariwisata.model.penginapan.Penginapan;
+import pariwisata.model.penginapan.PenginapanJdbc;
+import pariwisata.model.penginapan.PenginapanJdbcImplement;
+import pariwisata.model.transport.Transportasi;
+import pariwisata.model.transport.TransportasiJdbc;
+import pariwisata.model.transport.TransportasiJdbcImplement;
+import pariwisata.model.wisata.Wisata;
+import pariwisata.model.wisata.WisataJdbc;
+import pariwisata.model.wisata.WisataJdbcImplement;
+
 public class FormWisata extends javax.swing.JFrame {
+
+    private final WisataJdbc wisataJdbc;
+    private final PenginapanJdbc penginapanJdbc;
+    private final TransportasiJdbc transportasiJdbc;
+    private Boolean clickTable;
+    private DefaultTableModel defaultTableModel;
 
     public FormWisata() {
         initComponents();
+        wisataJdbc = new WisataJdbcImplement();
+        penginapanJdbc = new PenginapanJdbcImplement();
+        transportasiJdbc = new TransportasiJdbcImplement();
+        initTable();
+        loadTable();
+        loadComboBoxPenginapan();
+        loadComboBoxTransportasi();
+    }
+
+    private void initTable() {
+        defaultTableModel = new DefaultTableModel();
+        defaultTableModel.addColumn("No");
+        defaultTableModel.addColumn("Paket");
+        defaultTableModel.addColumn("Harga");
+        defaultTableModel.addColumn("ID Penginapan");
+        defaultTableModel.addColumn("Penginapan");
+        defaultTableModel.addColumn("ID Transportasi");
+        defaultTableModel.addColumn("Transportasi");
+        defaultTableModel.addColumn("Makanan");
+        defaultTableModel.addColumn("Tambahan");
+        tblWisata.setModel(defaultTableModel);
+    }
+
+    private void loadTable() {
+        defaultTableModel.getDataVector().removeAllElements();
+        defaultTableModel.fireTableDataChanged();
+        List<Wisata> responses = wisataJdbc.selectAll();
+        if (responses != null) {
+            Object[] objects = new Object[9];
+            for (Wisata response : responses) {
+                objects[0] = response.getId();
+                objects[1] = response.getPaket();
+                objects[2] = response.getHarga();
+                objects[3] = response.getId_penginapan();
+                objects[4] = response.getNama_penginapan();
+                objects[5] = response.getId_transportasi();
+                objects[6] = response.getNama_transportasi();
+                objects[7] = response.getDeskripsi_makanan_minuman();
+                objects[8] = response.getDeskripsi_tambahan();
+                defaultTableModel.addRow(objects);
+            }
+            clickTable = false;
+        }
+    }
+    
+    private void loadComboBoxPenginapan() {
+        List<Penginapan> responses = penginapanJdbc.selectAll();
+        for (Penginapan response : responses) {
+            cbxIdPenginapan.addItem(String.valueOf(response.getId()));
+        }
+    }
+    
+    private void loadComboBoxTransportasi() {
+        List<Transportasi> responses = transportasiJdbc.selectAll();
+        for (Transportasi response : responses) {
+            cbxIdTransportasi.addItem(String.valueOf(response.getId()));
+        }
+    }
+
+    private void clickTable() {
+        String paketWisata, hargaWisata, idPenginapan, namaPenginapan, idTransportasi, namaTransportasi, makanan, tambahan;
+        paketWisata         = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 1).toString();
+        hargaWisata         = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 2).toString();
+        idPenginapan        = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 3).toString();
+        namaPenginapan      = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 4).toString();
+        idTransportasi      = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 5).toString();
+        namaTransportasi    = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 6).toString();
+        makanan             = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 7).toString();
+        tambahan            = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 8).toString();
+        
+        txtPktWisata.setText(paketWisata);
+        txtHrgWisata.setText(hargaWisata);
+        cbxIdPenginapan.setSelectedItem(idPenginapan);
+        txtNmPenginapan.setText(namaPenginapan);
+        cbxIdTransportasi.setSelectedItem(idTransportasi);
+        txtNmTransportasi.setText(namaTransportasi);
+        txtMenuMakanan.setText(makanan);
+        txtMenuTambahan.setText(tambahan);
+        clickTable = true;
+    }
+
+    private void empty() {
+        txtPktWisata.setText("");
+        txtHrgWisata.setText("");
+        cbxIdPenginapan.setSelectedIndex(0);
+        txtNmPenginapan.setText("");
+        cbxIdTransportasi.setSelectedIndex(0);
+        txtNmTransportasi.setText("");
+        txtMenuMakanan.setText("");
+        txtMenuTambahan.setText("");
+    }
+
+    private void performSave() {
+        if (!txtPktWisata.getText().isEmpty() && !txtHrgWisata.getText().isEmpty()) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to save new data ?", "Info", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                Wisata request = new Wisata();
+                request.setId(0L);
+                request.setPaket(txtPktWisata.getText());
+                request.setHarga(Long.parseLong(txtHrgWisata.getText()));
+                request.setId_penginapan(Long.parseLong(cbxIdPenginapan.getSelectedItem().toString()));
+                request.setNama_penginapan(txtPktWisata.getText());
+                request.setId_transportasi(Long.parseLong(cbxIdTransportasi.getSelectedItem().toString()));
+                request.setNama_transportasi(txtNmTransportasi.getText());
+                request.setDeskripsi_makanan_minuman(txtMenuMakanan.getText());
+                request.setDeskripsi_tambahan(txtMenuTambahan.getText());
+                wisataJdbc.insert(request);
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully save data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void performUpdate() {
+        if (clickTable) {
+            if (!txtPktWisata.getText().isEmpty() && !txtHrgWisata.getText().isEmpty()) {
+                if (JOptionPane.showConfirmDialog(null, "Do you want to update data by id " + defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                    Wisata request = new Wisata();
+                    request.setId(Long.parseLong(defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 0).toString()));
+                    request.setPaket(txtPktWisata.getText());
+                    request.setHarga(Long.parseLong(txtHrgWisata.getText()));
+                    request.setId_penginapan(Long.parseLong(cbxIdPenginapan.getSelectedItem().toString()));
+                    request.setNama_penginapan(txtPktWisata.getText());
+                    request.setId_transportasi(Long.parseLong(cbxIdTransportasi.getSelectedItem().toString()));
+                    request.setNama_transportasi(txtNmTransportasi.getText());
+                    request.setDeskripsi_makanan_minuman(txtMenuMakanan.getText());
+                    request.setDeskripsi_tambahan(txtMenuTambahan.getText());
+                    wisataJdbc.update(request);
+                    loadTable();
+                    empty();
+                    JOptionPane.showMessageDialog(null, "Successfully update data", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Data not empty", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void performDelete() {
+        if (clickTable) {
+            if (JOptionPane.showConfirmDialog(null, "Do you want to delete data by id " + defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                wisataJdbc.delete(Long.parseLong(defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 0).toString()));
+                loadTable();
+                empty();
+                JOptionPane.showMessageDialog(null, "Successfully delete data", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Delete or edit must click table", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -15,8 +187,6 @@ public class FormWisata extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtPktWisata = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -32,13 +202,13 @@ public class FormWisata extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblWisata = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        txtIdTransportasi = new javax.swing.JTextField();
         txtHrgWisata = new javax.swing.JTextField();
-        txtIdPenginapan = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        cbxPktMenu = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        cbxTambahPktMenu = new javax.swing.JComboBox<>();
+        cbxIdPenginapan = new javax.swing.JComboBox<>();
+        cbxIdTransportasi = new javax.swing.JComboBox<>();
+        txtMenuMakanan = new javax.swing.JTextField();
+        txtMenuTambahan = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,13 +239,6 @@ public class FormWisata extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/tour-guide.png"))); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(102, 255, 255));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Id Wisata                      :");
-
-        txtId.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtId.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
@@ -124,6 +287,11 @@ public class FormWisata extends javax.swing.JFrame {
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/update.png"))); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setBackground(new java.awt.Color(102, 255, 102));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -131,6 +299,11 @@ public class FormWisata extends javax.swing.JFrame {
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/delete.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnClear.setBackground(new java.awt.Color(102, 255, 102));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -138,6 +311,11 @@ public class FormWisata extends javax.swing.JFrame {
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/close.png"))); // NOI18N
         btnClear.setText("Clear");
         btnClear.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         tblWisata.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,36 +325,33 @@ public class FormWisata extends javax.swing.JFrame {
                 "Id", "Paket", "Harga", "Id Penginapan", "Nm Penginapan", "Id Transport", "Nm Transport", "Paket Menu", "Add Paket Menu"
             }
         ));
+        tblWisata.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblWisataMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblWisata);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Id Transportasi    :");
 
-        txtIdTransportasi.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtIdTransportasi.setForeground(new java.awt.Color(0, 0, 0));
-
         txtHrgWisata.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtHrgWisata.setForeground(new java.awt.Color(0, 0, 0));
-
-        txtIdPenginapan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtIdPenginapan.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
         jLabel12.setText("Paket Menu          :");
 
-        cbxPktMenu.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbxPktMenu.setForeground(new java.awt.Color(102, 102, 102));
-        cbxPktMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paket Makanan" }));
-
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setText("Tambah Paket Menu :");
 
-        cbxTambahPktMenu.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbxTambahPktMenu.setForeground(new java.awt.Color(102, 102, 102));
-        cbxTambahPktMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Add Paket Makanan" }));
+        txtMenuMakanan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtMenuMakanan.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtMenuTambahan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtMenuTambahan.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -189,23 +364,21 @@ public class FormWisata extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtPktWisata)
-                    .addComponent(txtId)
                     .addComponent(txtNmPenginapan)
                     .addComponent(txtNmTransportasi)
-                    .addComponent(txtIdTransportasi)
                     .addComponent(txtHrgWisata, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtIdPenginapan, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxPktMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxTambahPktMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(cbxIdPenginapan, 0, 193, Short.MAX_VALUE)
+                    .addComponent(cbxIdTransportasi, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtMenuMakanan, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMenuTambahan, javax.swing.GroupLayout.Alignment.LEADING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -225,50 +398,46 @@ public class FormWisata extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPktWisata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(txtHrgWisata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(txtIdPenginapan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)
+                            .addComponent(cbxIdPenginapan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(txtNmPenginapan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(txtIdTransportasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cbxIdTransportasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(txtNmTransportasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(txtNmTransportasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(cbxPktMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtMenuMakanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(cbxTambahPktMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addComponent(txtMenuTambahan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -315,11 +484,27 @@ public class FormWisata extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        // TODO add your handling code here:
+        performSave();
     }//GEN-LAST:event_btnInsertActionPerformed
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        performUpdate();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        performDelete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        empty();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void tblWisataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblWisataMouseClicked
+        clickTable();
+    }//GEN-LAST:event_tblWisataMouseClicked
+
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -327,16 +512,10 @@ public class FormWisata extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormWisata.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormWisata.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormWisata.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormWisata.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -350,15 +529,14 @@ public class FormWisata extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> cbxPktMenu;
-    private javax.swing.JComboBox<String> cbxTambahPktMenu;
+    private javax.swing.JComboBox<String> cbxIdPenginapan;
+    private javax.swing.JComboBox<String> cbxIdTransportasi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
@@ -369,9 +547,8 @@ public class FormWisata extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblWisata;
     private javax.swing.JTextField txtHrgWisata;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtIdPenginapan;
-    private javax.swing.JTextField txtIdTransportasi;
+    private javax.swing.JTextField txtMenuMakanan;
+    private javax.swing.JTextField txtMenuTambahan;
     private javax.swing.JTextField txtNmPenginapan;
     private javax.swing.JTextField txtNmTransportasi;
     private javax.swing.JTextField txtPktWisata;

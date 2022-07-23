@@ -12,7 +12,7 @@ public interface TransaksiJdbc {
 
     public void insert(Transaksi request);
 
-    public void update(TransaksiJdbc request);
+    public void update(Transaksi request);
     
     public void delete(Long request);
 

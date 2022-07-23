@@ -4,10 +4,10 @@ public class Wisata {
     
     private Long id;
     private String paket;
-    private int harga;
-    private int id_penginapan;
+    private Long harga;
+    private Long id_penginapan;
     private String nama_penginapan;
-    private int id_transportasi;
+    private Long id_transportasi;
     private String nama_transportasi;
     private String deskripsi_makanan_minuman;
     private String deskripsi_tambahan;
@@ -28,19 +28,19 @@ public class Wisata {
         this.paket = paket;
     }
 
-    public int getHarga() {
+    public Long getHarga() {
         return harga;
     }
 
-    public void setHarga(int harga) {
+    public void setHarga(Long harga) {
         this.harga = harga;
     }
 
-    public int getId_penginapan() {
+    public Long getId_penginapan() {
         return id_penginapan;
     }
 
-    public void setId_penginapan(int id_penginapan) {
+    public void setId_penginapan(Long id_penginapan) {
         this.id_penginapan = id_penginapan;
     }
 
@@ -52,11 +52,11 @@ public class Wisata {
         this.nama_penginapan = nama_penginapan;
     }
 
-    public int getId_transportasi() {
+    public Long getId_transportasi() {
         return id_transportasi;
     }
 
-    public void setId_transportasi(int id_transportasi) {
+    public void setId_transportasi(Long id_transportasi) {
         this.id_transportasi = id_transportasi;
     }
 

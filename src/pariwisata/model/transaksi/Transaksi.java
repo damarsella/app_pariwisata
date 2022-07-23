@@ -5,19 +5,19 @@ import java.util.Date;
 public class Transaksi {
     
     private Long id;
-    private int id_wisata;
+    private Long id_wisata;
     private String paket_wisata;
-    private int harga_wisata;
+    private Long harga_wisata;
     private String via_pembayaran;
-    private int id_penginapan;
+    private Long id_penginapan;
     private String nama_penginapan;
-    private int id_pengunjung;
+    private Long id_pengunjung;
     private String nama_pengunjung;
     private String deskripsi_makanan_minuman;
     private String deskripsi_tambahan;
     private Date dari;
     private Date sampai;
-    private int total_tanggal;
+    private Long total_tanggal;
 
     public Long getId() {
         return id;
@@ -27,11 +27,11 @@ public class Transaksi {
         this.id = id;
     }
 
-    public int getId_wisata() {
+    public Long getId_wisata() {
         return id_wisata;
     }
 
-    public void setId_wisata(int id_wisata) {
+    public void setId_wisata(Long id_wisata) {
         this.id_wisata = id_wisata;
     }
 
@@ -43,11 +43,11 @@ public class Transaksi {
         this.paket_wisata = paket_wisata;
     }
 
-    public int getHarga_wisata() {
+    public Long getHarga_wisata() {
         return harga_wisata;
     }
 
-    public void setHarga_wisata(int harga_wisata) {
+    public void setHarga_wisata(Long harga_wisata) {
         this.harga_wisata = harga_wisata;
     }
 
@@ -59,11 +59,11 @@ public class Transaksi {
         this.via_pembayaran = via_pembayaran;
     }
 
-    public int getId_penginapan() {
+    public Long getId_penginapan() {
         return id_penginapan;
     }
 
-    public void setId_penginapan(int id_penginapan) {
+    public void setId_penginapan(Long id_penginapan) {
         this.id_penginapan = id_penginapan;
     }
 
@@ -75,11 +75,11 @@ public class Transaksi {
         this.nama_penginapan = nama_penginapan;
     }
 
-    public int getId_pengunjung() {
+    public Long getId_pengunjung() {
         return id_pengunjung;
     }
 
-    public void setId_pengunjung(int id_pengunjung) {
+    public void setId_pengunjung(Long id_pengunjung) {
         this.id_pengunjung = id_pengunjung;
     }
 
@@ -123,11 +123,11 @@ public class Transaksi {
         this.sampai = sampai;
     }
 
-    public int getTotal_tanggal() {
+    public Long getTotal_tanggal() {
         return total_tanggal;
     }
 
-    public void setTotal_tanggal(int total_tanggal) {
+    public void setTotal_tanggal(Long total_tanggal) {
         this.total_tanggal = total_tanggal;
     }
     

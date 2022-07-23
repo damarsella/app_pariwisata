@@ -38,10 +38,10 @@ public class WisataJdbcImplement implements WisataJdbc {
                 Wisata wisata = new Wisata();
                 wisata.setId(resultSet.getLong("id"));
                 wisata.setPaket(resultSet.getString("paket"));
-                wisata.setHarga(resultSet.getInt("harga"));
-                wisata.setId_penginapan(resultSet.getInt("id_penginapan"));
+                wisata.setHarga(resultSet.getLong("harga"));
+                wisata.setId_penginapan(resultSet.getLong("id_penginapan"));
                 wisata.setNama_penginapan(resultSet.getString("nama_penginapan"));
-                wisata.setId_transportasi(resultSet.getInt("id_transportasi"));
+                wisata.setId_transportasi(resultSet.getLong("id_transportasi"));
                 wisata.setNama_transportasi(resultSet.getString("nama_transportasi"));
                 wisata.setDeskripsi_makanan_minuman(resultSet.getString("deskripsi_makanan_minuman"));
                 wisata.setDeskripsi_makanan_minuman(resultSet.getString("deskripsi_tambahan"));
@@ -62,17 +62,16 @@ public class WisataJdbcImplement implements WisataJdbc {
     public void insert(Wisata request) {
         logger.debug(request.toString());
         try {
-            sql = "INSERT INTO wisata (nama) VALUES(?);";
+            sql = "INSERT INTO wisata (paket, harga, id_penginapan, nama_penginapan, id_transportasi, nama_transportasi, deskripsi_makanan_minuman, deskripsi_tambahan) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, request.getId());
-            preparedStatement.setString(2, request.getPaket());
-            preparedStatement.setInt(3, request.getHarga());
-            preparedStatement.setInt(4, request.getId_penginapan());
-            preparedStatement.setString(5, request.getNama_penginapan());
-            preparedStatement.setInt(6, request.getId_transportasi());
-            preparedStatement.setString(7, request.getNama_transportasi());          
-            preparedStatement.setString(8, request.getDeskripsi_makanan_minuman());          
-            preparedStatement.setString(9, request.getDeskripsi_tambahan());          
+            preparedStatement.setString(1, request.getPaket());
+            preparedStatement.setLong(2, request.getHarga());
+            preparedStatement.setLong(3, request.getId_penginapan());
+            preparedStatement.setString(4, request.getNama_penginapan());
+            preparedStatement.setLong(5, request.getId_transportasi());
+            preparedStatement.setString(6, request.getNama_transportasi());          
+            preparedStatement.setString(7, request.getDeskripsi_makanan_minuman());          
+            preparedStatement.setString(8, request.getDeskripsi_tambahan());          
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -85,17 +84,17 @@ public class WisataJdbcImplement implements WisataJdbc {
     public void update(Wisata request) {
         logger.debug(request.toString());
         try {
-            sql = "UPDATE wisata SET nama=? WHERE id=?;";
+            sql = "UPDATE wisata SET paket=?, harga=?, id_penginapan=?, nama_penginapan=?, id_transportasi=?, nama_transportasi=?, deskripsi_makanan_minuman=?, deskripsi_tambahan=? WHERE id=?;";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, request.getId());
-            preparedStatement.setString(2, request.getPaket());
-            preparedStatement.setInt(3, request.getHarga());
-            preparedStatement.setInt(4, request.getId_penginapan());
-            preparedStatement.setString(5, request.getNama_penginapan());
-            preparedStatement.setInt(6, request.getId_transportasi());
-            preparedStatement.setString(7, request.getNama_transportasi());          
-            preparedStatement.setString(8, request.getDeskripsi_makanan_minuman());          
-            preparedStatement.setString(9, request.getDeskripsi_tambahan());             
+            preparedStatement.setString(1, request.getPaket());
+            preparedStatement.setLong(2, request.getHarga());
+            preparedStatement.setLong(3, request.getId_penginapan());
+            preparedStatement.setString(4, request.getNama_penginapan());
+            preparedStatement.setLong(5, request.getId_transportasi());
+            preparedStatement.setString(6, request.getNama_transportasi());          
+            preparedStatement.setString(7, request.getDeskripsi_makanan_minuman());          
+            preparedStatement.setString(8, request.getDeskripsi_tambahan());
+            preparedStatement.setLong(9, request.getId());
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
