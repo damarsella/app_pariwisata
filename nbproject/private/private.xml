@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/wangu/Documents/NetBeansProjects/app_pariwisata/src/pariwisata/model/wisata/WisataJdbcImplement.java</file>
-            <file>file:/C:/Users/wangu/Documents/NetBeansProjects/app_pariwisata/src/pariwisata/view/wisata/FormWisata.java</file>
+            <file>file:/C:/Project%20Java%20Netbeans/app_pariwisata/src/pariwisata/model/wisata/WisataJdbcImplement.java</file>
+            <file>file:/C:/Project%20Java%20Netbeans/app_pariwisata/src/pariwisata/view/wisata/FormWisata.java</file>
+            <file>file:/C:/Project%20Java%20Netbeans/app_pariwisata/src/pariwisata/view/transaksi/FormTransaksi.java</file>
+            <file>file:/C:/Project%20Java%20Netbeans/app_pariwisata/src/Koneksi/Conn.java</file>
         </group>
     </open-files>
 </project-private>
