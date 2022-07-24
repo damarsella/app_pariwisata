@@ -139,6 +139,11 @@ public class FormRegister extends javax.swing.JFrame {
         toLogin.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         toLogin.setForeground(new java.awt.Color(0, 255, 255));
         toLogin.setText("Click here to Login ");
+        toLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                toLoginMouseClicked(evt);
+            }
+        });
 
         txtUser.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
@@ -281,6 +286,11 @@ public class FormRegister extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Adminname tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void toLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toLoginMouseClicked
+        new FormLogin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_toLoginMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

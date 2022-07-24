@@ -105,6 +105,11 @@ public class FormLogin extends javax.swing.JFrame {
         addAccount.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         addAccount.setForeground(new java.awt.Color(255, 255, 255));
         addAccount.setText("Create Account ?");
+        addAccount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addAccountMouseClicked(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/login.png"))); // NOI18N
 
@@ -255,6 +260,11 @@ public class FormLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Username tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void addAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addAccountMouseClicked
+        new FormRegister().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_addAccountMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
