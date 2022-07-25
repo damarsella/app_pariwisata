@@ -283,7 +283,7 @@ public class FormRegister extends javax.swing.JFrame {
             }
         } else {
             empty();
-            JOptionPane.showMessageDialog(null, "Adminname tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Admin tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
