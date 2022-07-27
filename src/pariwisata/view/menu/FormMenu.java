@@ -338,7 +338,7 @@ public class FormMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-         new FormLogin().setVisible(true);
+        new FormLogin().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
