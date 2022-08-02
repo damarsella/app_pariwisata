@@ -19,7 +19,7 @@ import pariwisata.view.menu.FormMenu;
 
 public class FormLaporan extends javax.swing.JFrame {
 
-    private final Connection connection;
+    private static Connection connection;
     private static final Logger logger = Logger.getLogger(FormLaporan.class);
 
     public FormLaporan() {
@@ -40,10 +40,10 @@ public class FormLaporan extends javax.swing.JFrame {
             InputStream file = getClass().getResourceAsStream("/pariwisata/report/Nota Pemesanan.jrxml");
             JasperDesign JasperDesign = JRXmlLoader.load(file);
             JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+            @SuppressWarnings("unchecked")
             JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
             JasperViewer.viewReport(JasperPrint, false);
         } catch (JRException e) {
-            System.out.println(e);
         }
     }
 
