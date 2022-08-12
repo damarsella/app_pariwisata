@@ -9,6 +9,8 @@ import java.util.List;
 public interface TransaksiJdbc {
 
     public List<Transaksi> selectAll();
+    
+    public Transaksi select(Long request);
 
     public void insert(Transaksi request);
 

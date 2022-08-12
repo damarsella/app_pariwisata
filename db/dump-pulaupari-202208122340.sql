@@ -29,7 +29,7 @@ CREATE TABLE `admin` (
   `password` varchar(100) DEFAULT NULL,
   `role` enum('Pemilik','Admin','Operator','Bagian Keuangan') DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1,'Andre','1','1','Admin'),(2,'Wawan','2','2','Pemilik'),(3,'Dano','3','3','Operator'),(4,'Lidya','4','4','Bagian Keuangan'),(5,'5','5','5','Bagian Keuangan');
+INSERT INTO `admin` VALUES (1,'Andre','1','1','Admin'),(2,'Wawan','2','2','Pemilik'),(3,'Dano','3','3','Operator'),(4,'Lidya','4','4','Bagian Keuangan');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `paket_wisata` (
   `sampai` date DEFAULT NULL,
   `total_tanggal` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `paket_wisata` (
 
 LOCK TABLES `paket_wisata` WRITE;
 /*!40000 ALTER TABLE `paket_wisata` DISABLE KEYS */;
-INSERT INTO `paket_wisata` VALUES (1,1,'Paket 1',150000,'Transfer',1,'Penginapan 1',1,'Pengunjung 1','Paket Makanan 1','Tambahan 1','2022-07-14','2022-07-22',9),(2,1,'Paket 1',150000,'Cash',1,'Penginapan 1',2,'Pengunjung 2','Paket Makanan 1','Tambahan 1','2022-07-14','2022-07-21',8),(3,5,'Paket 5',1000000,'Transfer',4,'Penginapan 4',3,'Pengunjung 3','Paket Makanan 5','Tambahan 5','2022-07-14','2022-07-20',7);
+INSERT INTO `paket_wisata` VALUES (1,1,'Paket 1',150000,'Transfer',1,'Penginapan 1',1,'Pengunjung 1','Paket Makanan 1','Tambahan 1','2022-07-14','2022-07-20',7),(2,1,'Paket 1',150000,'Cash',1,'Penginapan 1',2,'Pengunjung 2','Paket Makanan 1','Tambahan 1','2022-07-14','2022-07-20',7),(3,5,'Paket 5',1000000,'Transfer',4,'Penginapan 4',3,'Pengunjung 3','Paket Makanan 5','Tambahan 5','2022-07-14','2022-07-20',7),(4,1,'Paket 1',150000,'Cash',1,'Penginapan 1',1,'Pengunjung 1','Paket Makanan 1','Tambahan 1','2022-08-12','2022-08-12',0);
 /*!40000 ALTER TABLE `paket_wisata` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `penginapan` (
 
 LOCK TABLES `penginapan` WRITE;
 /*!40000 ALTER TABLE `penginapan` DISABLE KEYS */;
-INSERT INTO `penginapan` VALUES (1,'Penginapan 1'),(2,'Penginapan 2'),(3,'Penginapan 3'),(4,'Penginapan 4'),(5,'Penginapan 5'),(6,'Penginapan 6');
+INSERT INTO `penginapan` VALUES (1,'Penginapan 1'),(2,'Penginapan 2'),(3,'Penginapan 3'),(4,'Penginapan 4'),(5,'Penginapan 5');
 /*!40000 ALTER TABLE `penginapan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,9 +112,11 @@ DROP TABLE IF EXISTS `pengunjung`;
 CREATE TABLE `pengunjung` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) DEFAULT NULL,
+  `nik` varchar(10) DEFAULT NULL,
   `alamat` varchar(100) DEFAULT NULL,
+  `telepon` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +125,7 @@ CREATE TABLE `pengunjung` (
 
 LOCK TABLES `pengunjung` WRITE;
 /*!40000 ALTER TABLE `pengunjung` DISABLE KEYS */;
-INSERT INTO `pengunjung` VALUES (1,'Pengunjung 1','Alamat 1'),(2,'Pengunjung 2','Alamat 2'),(3,'Pengunjung 3','Alamat 3'),(4,'Pengunjung 4','Alamat 4');
+INSERT INTO `pengunjung` VALUES (1,'Pengunjung 1','0','Alamat 1','0'),(2,'Pengunjung 2','0','Alamat 2','0'),(3,'Pengunjung 3','0','Alamat 3','0'),(4,'Pengunjung 4','0','Alamat 4','0');
 /*!40000 ALTER TABLE `pengunjung` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +140,7 @@ CREATE TABLE `transportasi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +180,7 @@ CREATE TABLE `wisata` (
 
 LOCK TABLES `wisata` WRITE;
 /*!40000 ALTER TABLE `wisata` DISABLE KEYS */;
-INSERT INTO `wisata` VALUES (1,'Paket 1',150000,1,'Penginapan 1',1,'Transportasi 1','Paket Makanan 1','Tambahan 1'),(2,'Paket 2',200000,2,'Penginapan 2',1,'Transportasi 1','Paket Makanan 2','Tambahan 2'),(3,'Paket 3',300000,2,'Penginapan 2',2,'Transportasi 2','Paket Makanan 3','Tambahan 3'),(4,'Paket 4',500000,3,'Penginapan 3',3,'Transportasi 3','Paket Makanan 4','Tambahan 5'),(5,'Paket 5',1000000,4,'Penginapan 4',4,'Transportasi 4','Paket Makanan 5','Tambahan 5'),(6,'aweg',345,3,'aweg',2,'stg','dsfg','esryg');
+INSERT INTO `wisata` VALUES (1,'Paket 1',150000,1,'Penginapan 1',1,'Transportasi 1','Paket Makanan 1','Tambahan 1'),(2,'Paket 2',200000,2,'Penginapan 2',1,'Transportasi 1','Paket Makanan 2','Tambahan 2'),(3,'Paket 3',300000,2,'Penginapan 2',2,'Transportasi 2','Paket Makanan 3','Tambahan 3'),(4,'Paket 4',500000,3,'Penginapan 3',3,'Transportasi 3','Paket Makanan 4','Tambahan 5'),(5,'Paket 5',100000,1,'Paket 5',1,'Transportasi 4','Paket Makanan 5','Tambahan 5');
 /*!40000 ALTER TABLE `wisata` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,4 +197,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-25 23:48:11
+-- Dump completed on 2022-08-12 23:40:00

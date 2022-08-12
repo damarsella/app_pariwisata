@@ -59,6 +59,40 @@ public class TransaksiJdbcImplement implements TransaksiJdbc {
             return null;
         }
     }
+    
+    @Override
+    public Transaksi select(Long request) {
+        logger.debug(request.toString());
+        Transaksi response = new Transaksi();
+        try {
+            sql = "select * from paket_wisata where id = ?;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, request);
+            logger.debug(preparedStatement.toString());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                response.setId(resultSet.getLong("id"));
+                response.setId_wisata(resultSet.getLong("id_wisata"));
+                response.setPaket_wisata(resultSet.getString("paket_wisata"));
+                response.setHarga_wisata(resultSet.getLong("harga_wisata"));
+                response.setVia_pembayaran(resultSet.getString("via_pembayaran"));
+                response.setId_penginapan(resultSet.getLong("id_penginapan"));
+                response.setNama_penginapan(resultSet.getString("nama_penginapan"));
+                response.setId_pengunjung(resultSet.getLong("id_pengunjung"));
+                response.setNama_pengunjung(resultSet.getString("nama_pengunjung"));
+                response.setDeskripsi_makanan_minuman(resultSet.getString("deskripsi_makanan_minuman"));
+                response.setDeskripsi_tambahan(resultSet.getString("deskripsi_tambahan"));
+                response.setDari(resultSet.getDate("dari"));
+                response.setSampai(resultSet.getDate("sampai"));
+                response.setTotal_tanggal(resultSet.getLong("total_tanggal"));
+            }
+            logger.debug(response.toString());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+            logger.error(e.getMessage());
+        }
+        return response;
+    }
 
     /**
      *

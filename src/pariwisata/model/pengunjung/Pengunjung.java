@@ -4,8 +4,8 @@ public class Pengunjung {
     
     private Long id;
     private String nama;
-    private Long nik;
-    private Long telepon;
+    private String nik;
+    private String telepon;
     private String alamat;
 
     public Long getId() {
@@ -32,19 +32,19 @@ public class Pengunjung {
         this.alamat = alamat;
     }
 
-    public Long getNik() {
+    public String getNik() {
         return nik;
     }
 
-    public void setNik(Long nik) {
+    public void setNik(String nik) {
         this.nik = nik;
     }
 
-    public Long getTelepon() {
+    public String getTelepon() {
         return telepon;
     }
 
-    public void setTelepon(Long telepon) {
+    public void setTelepon(String telepon) {
         this.telepon = telepon;
     }
 

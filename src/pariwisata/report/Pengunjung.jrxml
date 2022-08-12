@@ -6,6 +6,7 @@
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Pulau Pari"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="Logo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT id, nama, alamat
 FROM pengunjung;]]>
@@ -49,6 +50,7 @@ FROM pengunjung;]]>
 			</staticText>
 			<image>
 				<reportElement x="1" y="2" width="160" height="76" uuid="cda00184-164c-4c6d-9be1-d3cfd44ce27b"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -168,6 +170,20 @@ FROM pengunjung;]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["Jakarta, " + new SimpleDateFormat("EEEE, dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="600" y="20" width="200" height="20" uuid="eef73263-3992-4291-b0bc-be7884fce9cb"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bagian Keuangan]]></text>
+			</staticText>
 		</band>
 	</pageFooter>
 </jasperReport>

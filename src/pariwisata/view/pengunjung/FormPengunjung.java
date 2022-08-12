@@ -50,12 +50,21 @@ public class FormPengunjung extends javax.swing.JFrame {
     }
 
     private void clickTable() {
-        txtNama.setText(defaultTableModel.getValueAt(tblPengunjung.getSelectedRow(), 1).toString());
+        Pengunjung response = pengunjungJdbc.select(Long.parseLong(defaultTableModel.getValueAt(tblPengunjung.getSelectedRow(), 0).toString()));
+        
+        txtNama.setText(response.getNama());
+        txtNik.setText(response.getNik());
+        txtTelepon.setText(response.getTelepon());
+        txtAlamat.setText(response.getAlamat());
+        
         clickTable = true;
     }
 
     private void empty() {
         txtNama.setText("");
+        txtNik.setText("");
+        txtTelepon.setText("");
+        txtAlamat.setText("");
     }
 
     private void performSave() {
@@ -64,8 +73,8 @@ public class FormPengunjung extends javax.swing.JFrame {
                 Pengunjung request = new Pengunjung();
                 request.setId(0L);
                 request.setNama(txtNama.getText());
-                request.setNik(Long.parseLong(txtNik.getText()));
-                request.setTelepon(Long.parseLong(txtTelepon.getText()));
+                request.setNik(txtNik.getText());
+                request.setTelepon(txtTelepon.getText());
                 request.setAlamat(txtAlamat.getText());
                 pengunjungJdbc.insert(request);
                 loadTable();
@@ -84,8 +93,8 @@ public class FormPengunjung extends javax.swing.JFrame {
                     Pengunjung request = new Pengunjung();
                     request.setId(Long.parseLong(defaultTableModel.getValueAt(tblPengunjung.getSelectedRow(), 0).toString()));
                     request.setNama(txtNama.getText());
-                    request.setNik(Long.parseLong(txtNik.getText()));
-                    request.setTelepon(Long.parseLong(txtTelepon.getText()));
+                    request.setNik(txtNik.getText());
+                    request.setTelepon(txtTelepon.getText());
                     request.setAlamat(txtAlamat.getText());
                     pengunjungJdbc.update(request);
                     loadTable();

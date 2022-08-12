@@ -110,16 +110,18 @@ public class FormTransaksi extends javax.swing.JFrame {
     }
 
     private void clickTable() {
-        cbxIdWisata.setSelectedItem(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 1).toString());
-        txtPaketWisata.setText(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 2).toString());
-        txtHargaWisata.setText(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 3).toString());
-        cbxViaPembayaran.setSelectedItem(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 4).toString());
-        txtidPenginapan.setText(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 5).toString());
-        txtNamaPenginapan.setText(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 6).toString());
-        cbxIdPengunjung.setSelectedItem(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 7).toString());
-        txtNamaPengunjung.setText(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 8).toString());
-        txtDeskrispsiMakanan.setText(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 9).toString());
-        txtDeskripsiTambahan.setText(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 10).toString());
+        Transaksi response = transaksiJdbc.select(Long.parseLong(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 0).toString()));
+        
+        cbxIdWisata.setSelectedItem(response.getId_wisata());
+        txtPaketWisata.setText(response.getPaket_wisata());
+        txtHargaWisata.setText(response.getHarga_wisata().toString());
+        cbxViaPembayaran.setSelectedItem(response.getVia_pembayaran());
+        txtidPenginapan.setText(response.getNama_penginapan());
+        txtNamaPenginapan.setText(response.getNama_penginapan());
+        cbxIdPengunjung.setSelectedItem(response.getId_pengunjung());
+        txtNamaPengunjung.setText(response.getNama_pengunjung());
+        txtDeskrispsiMakanan.setText(response.getDeskripsi_makanan_minuman());
+        txtDeskripsiTambahan.setText(response.getDeskripsi_tambahan());
         clickTable = true;
     }
 

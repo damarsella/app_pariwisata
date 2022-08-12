@@ -44,7 +44,7 @@ public class WisataJdbcImplement implements WisataJdbc {
                 wisata.setId_transportasi(resultSet.getLong("id_transportasi"));
                 wisata.setNama_transportasi(resultSet.getString("nama_transportasi"));
                 wisata.setDeskripsi_makanan_minuman(resultSet.getString("deskripsi_makanan_minuman"));
-                wisata.setDeskripsi_makanan_minuman(resultSet.getString("deskripsi_tambahan"));
+                wisata.setDeskripsi_tambahan(resultSet.getString("deskripsi_tambahan"));
                 response.add(wisata);
             }
             resultSet.close();
@@ -57,7 +57,7 @@ public class WisataJdbcImplement implements WisataJdbc {
             return null;
         }
     }
-    
+
     @Override
     public Wisata select(Long request) {
         logger.debug(request.toString());
@@ -77,7 +77,7 @@ public class WisataJdbcImplement implements WisataJdbc {
                 response.setId_transportasi(resultSet.getLong("id_transportasi"));
                 response.setNama_transportasi(resultSet.getString("nama_transportasi"));
                 response.setDeskripsi_makanan_minuman(resultSet.getString("deskripsi_makanan_minuman"));
-                response.setDeskripsi_makanan_minuman(resultSet.getString("deskripsi_tambahan"));
+                response.setDeskripsi_tambahan(resultSet.getString("deskripsi_tambahan"));
             }
             logger.debug(response.toString());
         } catch (SQLException e) {
@@ -98,9 +98,9 @@ public class WisataJdbcImplement implements WisataJdbc {
             preparedStatement.setLong(3, request.getId_penginapan());
             preparedStatement.setString(4, request.getNama_penginapan());
             preparedStatement.setLong(5, request.getId_transportasi());
-            preparedStatement.setString(6, request.getNama_transportasi());          
-            preparedStatement.setString(7, request.getDeskripsi_makanan_minuman());          
-            preparedStatement.setString(8, request.getDeskripsi_tambahan());          
+            preparedStatement.setString(6, request.getNama_transportasi());
+            preparedStatement.setString(7, request.getDeskripsi_makanan_minuman());
+            preparedStatement.setString(8, request.getDeskripsi_tambahan());
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -120,8 +120,8 @@ public class WisataJdbcImplement implements WisataJdbc {
             preparedStatement.setLong(3, request.getId_penginapan());
             preparedStatement.setString(4, request.getNama_penginapan());
             preparedStatement.setLong(5, request.getId_transportasi());
-            preparedStatement.setString(6, request.getNama_transportasi());          
-            preparedStatement.setString(7, request.getDeskripsi_makanan_minuman());          
+            preparedStatement.setString(6, request.getNama_transportasi());
+            preparedStatement.setString(7, request.getDeskripsi_makanan_minuman());
             preparedStatement.setString(8, request.getDeskripsi_tambahan());
             preparedStatement.setLong(9, request.getId());
             logger.debug(preparedStatement.toString());
@@ -147,5 +147,5 @@ public class WisataJdbcImplement implements WisataJdbc {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-   
+
 }

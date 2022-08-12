@@ -16,6 +16,8 @@ import pariwisata.view.menu.FormMenu;
 
 public class FormWisata extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+
     private final WisataJdbc wisataJdbc;
     private final PenginapanJdbc penginapanJdbc;
     private final TransportasiJdbc transportasiJdbc;
@@ -94,24 +96,16 @@ public class FormWisata extends javax.swing.JFrame {
     }
 
     private void clickTable() {
-        String paketWisata, hargaWisata, idPenginapan, namaPenginapan, idTransportasi, namaTransportasi, makanan, tambahan;
-        paketWisata = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 1).toString();
-        hargaWisata = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 2).toString();
-        idPenginapan = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 3).toString();
-        namaPenginapan = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 4).toString();
-        idTransportasi = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 5).toString();
-        namaTransportasi = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 6).toString();
-        makanan = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 7).toString();
-        tambahan = defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 8).toString();
+        Wisata response = wisataJdbc.select(Long.parseLong(defaultTableModel.getValueAt(tblWisata.getSelectedRow(), 0).toString()));
 
-        txtPktWisata.setText(paketWisata);
-        txtHrgWisata.setText(hargaWisata);
-        cbxIdPenginapan.setSelectedItem(idPenginapan);
-        txtNmPenginapan.setText(namaPenginapan);
-        cbxIdTransportasi.setSelectedItem(idTransportasi);
-        txtNmTransportasi.setText(namaTransportasi);
-        txtMenuMakanan.setText(makanan);
-        txtMenuTambahan.setText(tambahan);
+        txtPktWisata.setText(response.getPaket());
+        txtHrgWisata.setText(response.getHarga().toString());
+        cbxIdPenginapan.setSelectedItem(response.getId_penginapan());
+        txtNmPenginapan.setText(response.getNama_penginapan());
+        cbxIdTransportasi.setSelectedItem(response.getId_transportasi());
+        txtNmTransportasi.setText(response.getNama_transportasi());
+        txtMenuMakanan.setText(response.getDeskripsi_makanan_minuman());
+        txtMenuTambahan.setText(response.getDeskripsi_tambahan());
         clickTable = true;
     }
 
