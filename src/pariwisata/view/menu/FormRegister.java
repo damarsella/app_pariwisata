@@ -87,7 +87,7 @@ public class FormRegister extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(0, 0, 102));
 
-        txtNama.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -278,7 +278,7 @@ public class FormRegister extends javax.swing.JFrame {
             }
         } else {
             empty();
-            JOptionPane.showMessageDialog(null, "Adminname tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Admin name tidak boleh kosong", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 

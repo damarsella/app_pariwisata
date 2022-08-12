@@ -10,10 +10,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 
-/**
- *
- * @author Khanza
- */
 public class TransaksiJdbcImplement implements TransaksiJdbc {
 
     private final Connection connection;

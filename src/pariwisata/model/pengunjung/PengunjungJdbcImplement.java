@@ -38,6 +38,8 @@ public class PengunjungJdbcImplement implements PengunjungJdbc {
                 Pengunjung pengunjung = new Pengunjung();
                 pengunjung.setId(resultSet.getLong("id"));
                 pengunjung.setNama(resultSet.getString("nama"));
+                pengunjung.setNik(resultSet.getLong("nik"));
+                pengunjung.setTelepon(resultSet.getLong("telepon"));
                 pengunjung.setAlamat(resultSet.getString("alamat"));
                 response.add(pengunjung);
             }
@@ -65,6 +67,8 @@ public class PengunjungJdbcImplement implements PengunjungJdbc {
             if (resultSet.next()) {
                 response.setId(resultSet.getLong("id"));
                 response.setNama(resultSet.getString("nama"));
+                response.setNik(resultSet.getLong("nik"));
+                response.setTelepon(resultSet.getLong("telepon"));
                 response.setAlamat(resultSet.getString("alamat"));
             }
             logger.debug(response.toString());
@@ -79,10 +83,12 @@ public class PengunjungJdbcImplement implements PengunjungJdbc {
     public void insert(Pengunjung request) {
         logger.debug(request.toString());
         try {
-            sql = "INSERT INTO pengunjung (nama, alamat) VALUES(?, ?);";
+            sql = "INSERT INTO pengunjung (nama, nik, telepon, alamat) VALUES(?, ?, ?, ?);";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, request.getNama());
-            preparedStatement.setString(2, request.getAlamat());
+            preparedStatement.setLong(2, request.getNik());
+            preparedStatement.setLong(3, request.getTelepon());
+            preparedStatement.setString(4, request.getAlamat());
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -95,11 +101,13 @@ public class PengunjungJdbcImplement implements PengunjungJdbc {
     public void update(Pengunjung request) {
         logger.debug(request.toString());
         try {
-            sql = "UPDATE pengunjung SET nama=?, alamat=? WHERE id=?;";
+            sql = "UPDATE pengunjung SET nama=?, nik=?, telepon=?, alamat=? WHERE id=?;";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, request.getNama());
-            preparedStatement.setString(2, request.getAlamat());
-            preparedStatement.setLong(3, request.getId());
+            preparedStatement.setLong(2, request.getNik());
+            preparedStatement.setLong(3, request.getTelepon());
+            preparedStatement.setString(4, request.getAlamat());
+            preparedStatement.setLong(5, request.getId());
             logger.debug(preparedStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();

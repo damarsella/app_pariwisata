@@ -4,6 +4,8 @@ public class Pengunjung {
     
     private Long id;
     private String nama;
+    private Long nik;
+    private Long telepon;
     private String alamat;
 
     public Long getId() {
@@ -30,9 +32,26 @@ public class Pengunjung {
         this.alamat = alamat;
     }
 
+    public Long getNik() {
+        return nik;
+    }
+
+    public void setNik(Long nik) {
+        this.nik = nik;
+    }
+
+    public Long getTelepon() {
+        return telepon;
+    }
+
+    public void setTelepon(Long telepon) {
+        this.telepon = telepon;
+    }
+
     @Override
     public String toString() {
-        return "Pengunjung{" + "id=" + id + ", nama=" + nama + ", alamat=" + alamat + '}';
+        return "Pengunjung{" + "id=" + id + ", nama=" + nama + ", nik=" + nik + ", telepon=" + telepon + ", alamat=" + alamat + '}';
     }
+    
     
 }

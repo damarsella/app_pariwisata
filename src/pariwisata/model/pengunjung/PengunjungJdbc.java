@@ -2,10 +2,6 @@ package pariwisata.model.pengunjung;
 
 import java.util.List;
 
-/**
- *
- * @author Khanza
- */
 public interface PengunjungJdbc {
 
     public List<Pengunjung> selectAll();

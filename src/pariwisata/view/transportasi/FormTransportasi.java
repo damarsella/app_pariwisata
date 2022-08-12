@@ -5,7 +5,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pariwisata.model.transport.Transportasi;
 import pariwisata.model.transport.TransportasiJdbc;
-import pariwisata.model.transport.TransportasiJdbcImplement;
+import 
+pariwisata.model.transport.TransportasiJdbcImplement;
 import pariwisata.view.menu.FormMenu;
 
 public class FormTransportasi extends javax.swing.JFrame {
@@ -122,7 +123,6 @@ public class FormTransportasi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FormTransportasi");
-        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 

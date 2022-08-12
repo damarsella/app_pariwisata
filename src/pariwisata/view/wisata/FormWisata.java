@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import pariwisata.model.penginapan.Penginapan;
 import pariwisata.model.penginapan.PenginapanJdbc;
 import pariwisata.model.penginapan.PenginapanJdbcImplement;
-import pariwisata.model.pengunjung.Pengunjung;
 import pariwisata.model.transport.Transportasi;
 import pariwisata.model.transport.TransportasiJdbc;
 import pariwisata.model.transport.TransportasiJdbcImplement;
@@ -53,7 +52,7 @@ public class FormWisata extends javax.swing.JFrame {
         defaultTableModel.fireTableDataChanged();
         List<Wisata> responses = wisataJdbc.selectAll();
         if (responses != null) {
-            Object[] objects = new Object[9];
+            Object[] objects = new Object[10];
             for (Wisata response : responses) {
                 objects[0] = response.getId();
                 objects[1] = response.getPaket();

@@ -9,6 +9,7 @@ public class Conn {
         if(koneksi == null){
           try{
               String url = "jdbc:mysql://localhost/pulaupari";
+              //String url = "jdbc:mysql://localhost/127.0.0.1:3308/pulaupari";
               String user = "root";
               String password = "";
               
