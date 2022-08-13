@@ -1,8 +1,20 @@
 package pariwisata.view.transaksi;
 
+import Koneksi.Conn;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import pariwisata.model.pengunjung.Pengunjung;
 import pariwisata.model.pengunjung.PengunjungJdbc;
 import pariwisata.model.pengunjung.PengunjungJdbcImplement;
@@ -21,9 +33,11 @@ public class FormTransaksi extends javax.swing.JFrame {
     private final PengunjungJdbc pengunjungJdbc;
     private Boolean clickTable;
     private DefaultTableModel defaultTableModel;
+    private static Connection connection;
 
     public FormTransaksi() {
         initComponents();
+        connection = Conn.getConnection();
         transaksiJdbc = new TransaksiJdbcImplement();
         wisataJdbc = new WisataJdbcImplement();
         pengunjungJdbc = new PengunjungJdbcImplement();
@@ -31,6 +45,27 @@ public class FormTransaksi extends javax.swing.JFrame {
         loadTable();
         loadComboBoxWisata();
         loadComboBoxPengunjung();
+    }
+    
+    private void printKeuangan() {
+        if (jDateDari.getDate() != null && jDateSampai.getDate() != null) {
+            try {
+                HashMap parameter = new HashMap();
+                parameter.put("dari", jDateDari.getDate());
+                parameter.put("sampai", jDateSampai.getDate());
+                parameter.put("Logo", "src\\pariwisata\\report\\pulaupari.jpeg");
+                InputStream file = getClass().getResourceAsStream("/pariwisata/report/Keuangan.jrxml");
+                JasperDesign JasperDesign = JRXmlLoader.load(file);
+                JasperReport JasperReport = JasperCompileManager.compileReport(JasperDesign);
+                JasperPrint JasperPrint = JasperFillManager.fillReport(JasperReport, parameter, connection);
+                JasperViewer.viewReport(JasperPrint, false);
+            } catch (JRException e) {
+                System.out.println(e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Date tidak boleh kosong", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
     
     private void loadComboBoxWisata() {
@@ -124,19 +159,19 @@ public class FormTransaksi extends javax.swing.JFrame {
         txtDeskripsiTambahan.setText(response.getDeskripsi_tambahan());
         clickTable = true;
     }
-
-    private void empty() {
-        cbxIdWisata.setSelectedIndex(0);
-        txtPaketWisata.setText("");
-        txtHargaWisata.setText("");
-        cbxViaPembayaran.setSelectedIndex(0);
-        txtidPenginapan.setText("");
-        txtNamaPenginapan.setText("");
-        cbxIdPengunjung.setSelectedIndex(0);
-        txtNamaPengunjung.setText("");
-        txtDeskrispsiMakanan.setText("");
-        txtDeskripsiTambahan.setText("");
-    }
+//
+//    private void empty() {
+//        cbxIdWisata.setSelectedIndex(0);
+//        txtPaketWisata.setText("");
+//        txtHargaWisata.setText("");
+//        cbxViaPembayaran.setSelectedIndex(0);
+//        txtidPenginapan.setText("");
+//        txtNamaPenginapan.setText("");
+//        cbxIdPengunjung.setSelectedIndex(0);
+//        txtNamaPengunjung.setText("");
+//        txtDeskrispsiMakanan.setText("");
+//        txtDeskripsiTambahan.setText("");
+//    }
 
     private void performSave() {
         if (jDateDari.getDate() != null && jDateSampai.getDate() != null) {
@@ -156,7 +191,7 @@ public class FormTransaksi extends javax.swing.JFrame {
                 request.setSampai(jDateDari.getDate());
                 transaksiJdbc.insert(request);
                 loadTable();
-                empty();
+//                empty();
                 JOptionPane.showMessageDialog(null, "Successfully save data", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
@@ -183,7 +218,7 @@ public class FormTransaksi extends javax.swing.JFrame {
                     request.setSampai(jDateDari.getDate());
                     transaksiJdbc.update(request);
                     loadTable();
-                    empty();
+//                    empty();
                     JOptionPane.showMessageDialog(null, "Successfully update data", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
@@ -199,7 +234,7 @@ public class FormTransaksi extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(null, "Do you want to delete data by id " + defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                 transaksiJdbc.delete(Long.parseLong(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 0).toString()));
                 loadTable();
-                empty();
+//                empty();
                 JOptionPane.showMessageDialog(null, "Successfully delete data", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
@@ -225,7 +260,6 @@ public class FormTransaksi extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTransaksi = new javax.swing.JTable();
         cbxIdWisata = new javax.swing.JComboBox<>();
@@ -349,18 +383,6 @@ public class FormTransaksi extends javax.swing.JFrame {
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
-            }
-        });
-
-        btnClear.setBackground(new java.awt.Color(102, 255, 102));
-        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnClear.setForeground(new java.awt.Color(0, 0, 0));
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pariwisata/img/close.png"))); // NOI18N
-        btnClear.setText("Clear");
-        btnClear.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
             }
         });
 
@@ -508,15 +530,13 @@ public class FormTransaksi extends javax.swing.JFrame {
                             .addComponent(jDateDari, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateSampai, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(0, 0, 0)
                         .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClear1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -573,14 +593,13 @@ public class FormTransaksi extends javax.swing.JFrame {
                             .addComponent(txtDeskripsiTambahan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnClear1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -594,7 +613,7 @@ public class FormTransaksi extends javax.swing.JFrame {
                         .addGap(602, 602, 602)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -646,11 +665,6 @@ public class FormTransaksi extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        empty();
-
-    }//GEN-LAST:event_btnClearActionPerformed
-
     private void cbxIdWisataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxIdWisataActionPerformed
         loadTextWisata();
     }//GEN-LAST:event_cbxIdWisataActionPerformed
@@ -669,7 +683,7 @@ public class FormTransaksi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnClear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClear1ActionPerformed
-        // TODO add your handling code here:
+        printKeuangan();
     }//GEN-LAST:event_btnClear1ActionPerformed
 
     public static void main(String args[]) {
@@ -694,7 +708,6 @@ public class FormTransaksi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnClear1;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInsert;
