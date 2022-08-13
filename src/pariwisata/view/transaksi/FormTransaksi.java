@@ -46,7 +46,7 @@ public class FormTransaksi extends javax.swing.JFrame {
         loadComboBoxWisata();
         loadComboBoxPengunjung();
     }
-    
+
     private void printKeuangan() {
         if (jDateDari.getDate() != null && jDateSampai.getDate() != null) {
             try {
@@ -67,21 +67,21 @@ public class FormTransaksi extends javax.swing.JFrame {
         }
 
     }
-    
+
     private void loadComboBoxWisata() {
         List<Wisata> responses = wisataJdbc.selectAll();
         for (Wisata response : responses) {
             cbxIdWisata.addItem(String.valueOf(response.getId()));
         }
     }
-    
+
     private void loadComboBoxPengunjung() {
         List<Pengunjung> responses = pengunjungJdbc.selectAll();
         for (Pengunjung response : responses) {
             cbxIdPengunjung.addItem(String.valueOf(response.getId()));
         }
     }
-    
+
     private void loadTextWisata() {
         Wisata response = wisataJdbc.select(Long.parseLong(cbxIdWisata.getSelectedItem().toString()));
         txtPaketWisata.setText(response.getPaket());
@@ -91,7 +91,7 @@ public class FormTransaksi extends javax.swing.JFrame {
         txtDeskrispsiMakanan.setText(response.getDeskripsi_makanan_minuman());
         txtDeskripsiTambahan.setText(response.getDeskripsi_tambahan());
     }
-    
+
     private void loadTextPengunjung() {
         Pengunjung response = pengunjungJdbc.select(Long.parseLong(cbxIdPengunjung.getSelectedItem().toString()));
         txtNamaPengunjung.setText(response.getNama());
@@ -146,7 +146,7 @@ public class FormTransaksi extends javax.swing.JFrame {
 
     private void clickTable() {
         Transaksi response = transaksiJdbc.select(Long.parseLong(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 0).toString()));
-        
+
         cbxIdWisata.setSelectedItem(response.getId_wisata());
         txtPaketWisata.setText(response.getPaket_wisata());
         txtHargaWisata.setText(response.getHarga_wisata().toString());
@@ -177,7 +177,7 @@ public class FormTransaksi extends javax.swing.JFrame {
         if (jDateDari.getDate() != null && jDateSampai.getDate() != null) {
             if (JOptionPane.showConfirmDialog(null, "Do you want to save new data ?", "Info", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                 Transaksi request = new Transaksi();
-                request.setId(0L);
+                request.setPaket_wisata(txtPaketWisata.getText());
                 request.setId_wisata(Long.parseLong(cbxIdWisata.getSelectedItem().toString()));
                 request.setHarga_wisata(Long.parseLong(txtHargaWisata.getText()));
                 request.setId_penginapan(Long.parseLong(txtidPenginapan.getText()));
@@ -185,6 +185,7 @@ public class FormTransaksi extends javax.swing.JFrame {
                 request.setId_penginapan(Long.parseLong(txtidPenginapan.getText()));
                 request.setNama_penginapan(txtNamaPenginapan.getText());
                 request.setId_pengunjung(Long.parseLong(cbxIdPengunjung.getSelectedItem().toString()));
+                request.setNama_pengunjung(txtNamaPengunjung.getText());
                 request.setDeskripsi_makanan_minuman(txtDeskrispsiMakanan.getText());
                 request.setDeskripsi_tambahan(txtDeskripsiTambahan.getText());
                 request.setDari(jDateDari.getDate());
@@ -205,6 +206,7 @@ public class FormTransaksi extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(null, "Do you want to update data by id " + defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 0).toString() + " ?", "Warning", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                     Transaksi request = new Transaksi();
                     request.setId(Long.parseLong(defaultTableModel.getValueAt(tblTransaksi.getSelectedRow(), 0).toString()));
+                    request.setPaket_wisata(txtPaketWisata.getText());
                     request.setId_wisata(Long.parseLong(cbxIdWisata.getSelectedItem().toString()));
                     request.setHarga_wisata(Long.parseLong(txtHargaWisata.getText()));
                     request.setId_penginapan(Long.parseLong(txtidPenginapan.getText()));
@@ -212,6 +214,7 @@ public class FormTransaksi extends javax.swing.JFrame {
                     request.setId_penginapan(Long.parseLong(txtidPenginapan.getText()));
                     request.setNama_penginapan(txtNamaPenginapan.getText());
                     request.setId_pengunjung(Long.parseLong(cbxIdPengunjung.getSelectedItem().toString()));
+                    request.setNama_pengunjung(txtNamaPengunjung.getText());
                     request.setDeskripsi_makanan_minuman(txtDeskrispsiMakanan.getText());
                     request.setDeskripsi_tambahan(txtDeskripsiTambahan.getText());
                     request.setDari(jDateDari.getDate());
